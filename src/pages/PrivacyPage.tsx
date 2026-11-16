@@ -3,16 +3,11 @@ import { Lock } from 'lucide-react';
 import { EditorialCrest } from '@/src/components/ornaments/BotanicalArt';
 
 interface PrivacyPageProps {
-  activePersonName: string;
-  answeredCount: number;
+  completedCount: number;
   onNavigate: (to: string) => void;
 }
 
-export function PrivacyPage({
-  activePersonName,
-  answeredCount,
-  onNavigate,
-}: PrivacyPageProps) {
+export function PrivacyPage({ completedCount, onNavigate }: PrivacyPageProps) {
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
       <article className="rounded-3xl border border-[#E9D8D1] bg-[#FFFDF9] p-6 sm:p-10 space-y-7">
@@ -24,45 +19,43 @@ export function PrivacyPage({
             <Lock className="h-5 w-5" aria-hidden="true" />
           </div>
           <h1 className="font-display text-3xl font-bold text-[#351B38]">
-            الخصوصية وأمان بياناتكِ
+            الخصوصية وأمان بياناتكِ النفسية
           </h1>
           <p className="text-sm sm:text-base text-[#5F4562]">
-            لا نطلب معلومات شخصية أو بريد إلكتروني أو أرقام هواتف، ولا نفرض إنشاء حساب.
+            لا نطلب إنشاء حساب، ولا نجمع بريدكِ الإلكتروني أو رقم هاتفكِ، والمنصة مصممة لشخص واحد
+            فقط.
           </p>
         </header>
 
         <section className="space-y-4 text-sm sm:text-base leading-relaxed text-[#5F4562]">
           <h2 className="font-display text-lg font-bold text-[#351B38]">
-            كيف يتعامل موقع زهرتي مع خصوصية الطرفين؟
+            أين تُحفظ بياناتكِ وكيف نضمن سريتها؟
           </h2>
           <ul className="space-y-2.5 list-disc list-inside">
             <li>
-              <strong>تخزين محلي معزول لكل طرف:</strong> تُحفظ إجابات ونتائج ومفضلة كل شخص في
-              مفاتيح منفصلة داخل متصفحكِ (<span dir="ltr">localStorage</span>).
+              <strong>حفظ محلي بالكامل على جهازكِ:</strong> تُخزن جلساتكِ قيد التقدم ونتائجكِ
+              المكتملة محلياً داخل متصفحكِ (<span dir="ltr">localStorage</span>) دون إرسال أي
+              إجابات نفسية أو حساسة إلى طرف ثالث.
             </li>
             <li>
-              <strong>عدم كشف الإجابات الفردية:</strong> لا تعرض شاشة أحد الطرفين إجابات الطرف
-              الآخر، ولا تكشف صفحة التوافق أو عالمنا تفاصيل الأسئلة الثلاثين بل تعرض ملخص الأنماط
-              المشتركة والمكملة فقط وبعد إتمام الطرفين للاختبار.
+              <strong>حساب فردي حصري:</strong> لا توجد ميزة تبديل مستخدمين أو كشف سجل لشخص آخر؛
+              ما تدخلينه يخص مساحتكِ وحدكِ.
             </li>
             <li>
-              <strong>العمل دون إنترنت أو خوادم حفظ:</strong> على الاستضافة الساكنة (<span dir="ltr">GitHub Pages</span>)،
-              تُحسب جميع النتائج محلياً داخل المتصفح دون إرسال إجاباتج إلى أي قاعدة بيانات خارجية.
-            </li>
-            <li>
-              <strong>التحكم التام:</strong> يمكنكِ تصدير نسخة <span dir="ltr">JSON</span> أو إيقاف
-              المشاركة في التوافق أو حذف بيانات كل طرف من صفحة الإعدادات في أي لحظة.
+              <strong>التصدير والتحكم الكامل:</strong> بوسعكِ تحميل تقرير{' '}
+              <span dir="ltr">PDF</span> عربي للنتائج أو تصدير نسخة <span dir="ltr">JSON</span>{' '}
+              أو مسح كل السجلات نهائياً في أي وقت من الإعدادات.
             </li>
           </ul>
         </section>
 
         <div className="rounded-2xl border border-[#E9D8D1] bg-[#F9F3EC] p-5 flex flex-wrap items-center justify-between gap-4">
           <div className="text-sm text-[#351B38]">
-            <p className="font-semibold">حالة الجلسة النشطة ({activePersonName}):</p>
+            <p className="font-semibold">ملخص السجل المحفوظ على هذا المتصفح:</p>
             <p className="text-xs text-[#5F4562] tabular-nums">
-              {answeredCount > 0
-                ? `يوجد تقدم محفوظ حالياً (${answeredCount} من 30 إجابة).`
-                : 'لا توجد إجابات محفوظة حالياً لهذه الجلسة.'}
+              {completedCount > 0
+                ? `يوجد ${completedCount} تقييم مكتمل محفوظ محلياً.`
+                : 'لا توجد نتائج مكتملة محفوظة حالياً.'}
             </p>
           </div>
           <button
@@ -77,10 +70,10 @@ export function PrivacyPage({
         <div className="text-center pt-2">
           <button
             type="button"
-            onClick={() => onNavigate('/')}
+            onClick={() => onNavigate('/library')}
             className="rounded-full bg-[#762D50] px-6 py-2.5 text-sm font-medium text-[#F9F3EC] hover:bg-[#5D223E] cursor-pointer"
           >
-            العودة للرئيسية
+            الذهاب إلى مكتبة الاختبارات
           </button>
         </div>
       </article>

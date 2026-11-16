@@ -9,10 +9,48 @@ function normalizeRoute(raw: string): string {
   return cleaned || '/';
 }
 
+const KNOWN_TOP_ROUTES = new Set([
+  'library',
+  'report',
+  'assessment',
+  'intro',
+  'quiz',
+  'analyzing',
+  'results',
+  'profile',
+  'interests',
+  'majors',
+  'compare',
+  'compatibility',
+  'our-world',
+  'settings',
+  'about',
+  'methodology',
+  'privacy',
+  'terms',
+]);
+
+function detectRuntimeBasePath(): string {
+  try {
+    const modulePath = new URL(import.meta.url).pathname;
+    const assetsIdx = modulePath.indexOf('/assets/');
+    if (assetsIdx > 0) {
+      return modulePath.slice(0, assetsIdx);
+    }
+  } catch {
+    // Ignore URL parsing errors
+  }
+  const envBase = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
+  if (envBase && envBase !== '.' && envBase !== './' && envBase !== '/') {
+    return envBase;
+  }
+  return '';
+}
+
 function readCurrentRoute(): string {
   if (typeof window === 'undefined') return '/';
 
-  // 1. Prefer hash route (#/quiz, #/compatibility, #/majors/...) for static/GitHub Pages stability
+  // 1. Prefer hash route (#/quiz, #/library, #/majors/...) for static/GitHub Pages/Netlify/Cloudflare stability
   const hash = window.location.hash;
   if (hash && hash.startsWith('#')) {
     const insideHash = hash.slice(1);
@@ -25,15 +63,22 @@ function readCurrentRoute(): string {
     return '/';
   }
 
-  // 2. Fallback: strip Vite BASE_URL from pathname if entered directly
-  const baseUrl = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
-  let pathname = window.location.pathname || '/';
-  if (baseUrl && baseUrl !== '/' && pathname.startsWith(baseUrl)) {
-    pathname = pathname.slice(baseUrl.length) || '/';
+  // 2. Fallback: strip index.html and runtime/repository base path from pathname if entered directly
+  let pathname = (window.location.pathname || '/').replace(/\/index\.html$/i, '') || '/';
+  const runtimeBase = detectRuntimeBasePath();
+  if (runtimeBase && pathname.startsWith(runtimeBase)) {
+    pathname = pathname.slice(runtimeBase.length) || '/';
+  } else {
+    const segments = pathname.split('/').filter(Boolean);
+    if (segments.length > 0 && !KNOWN_TOP_ROUTES.has(segments[0])) {
+      if (window.location.hostname.endsWith('github.io') || segments.length === 1) {
+        pathname = '/' + segments.slice(1).join('/');
+      }
+    }
   }
 
   const params = new URLSearchParams(window.location.search);
-  if (params.get('autostart') === '1' && pathname === '/') {
+  if (params.get('autostart') === '1' && (pathname === '/' || pathname === '')) {
     return '/quiz';
   }
 

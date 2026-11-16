@@ -20,7 +20,11 @@ export function MethodologyPage({ onNavigate }: MethodologyPageProps) {
   useEffect(() => {
     const isStaticHost =
       typeof window !== 'undefined' &&
-      (window.location.hostname.endsWith('github.io') || window.location.protocol === 'file:');
+      (window.location.hostname.endsWith('github.io') ||
+        window.location.hostname.endsWith('netlify.app') ||
+        window.location.hostname.endsWith('pages.dev') ||
+        window.location.hostname.endsWith('vercel.app') ||
+        window.location.protocol === 'file:');
     if (isStaticHost) {
       setOnetConfigured(false);
       return;
@@ -44,10 +48,114 @@ export function MethodologyPage({ onNavigate }: MethodologyPageProps) {
           المصادر والمنهجية العلمية
         </h1>
         <p className="max-w-3xl text-sm sm:text-base text-[#5F4562]">
-          توثيق شفاف للأساس العلمي للمقياس، معادلة <span dir="ltr">Mini-IP</span> ومعادلة التوافق،
-          والمصادر العراقية الرسمية المستخدمة في قاعدة التخصصات.
+          توثيق شفاف للأساس العلمي للمقاييس النفسية المفتوحة، سياسة التراخيص وحقوق الملكية،
+          معادلة <span dir="ltr">O*NET® Mini-IP</span>، والمصادر العراقية الرسمية لقاعدة التخصصات.
         </p>
       </header>
+
+      {/* Complete Psychological Library Registry Audit */}
+      <section className="rounded-3xl border border-[#E9D8D1] bg-[#FFFDF9] p-6 sm:p-8 space-y-5">
+        <div className="flex items-center gap-2 text-[#762D50]">
+          <FileCheck2 className="h-5 w-5" aria-hidden="true" />
+          <h2 className="font-display text-xl font-bold text-[#351B38]">
+            سجل المقاييس النفسية وحالة التراخيص والتقنين العربي
+          </h2>
+        </div>
+
+        <p className="text-sm leading-relaxed text-[#5F4562]">
+          تعتمد منصة زهرتي فقط على الأدوات المفتوحة في الملكية العامة أو المتاحة مجاناً للاستخدام
+          التثقيفي بالإسناد الأصلي. المقاييس التجارية أو المحمية (مثل{' '}
+          <span dir="ltr">PSS-10, TEIQue-SF, BFI-44, ECR-R</span>) لا تُنسخ بنودها بل تُوثّق
+          في المكتبة لبيان متطلب الترخيص الرسمي وبديلها الحر المتاح.
+        </p>
+
+        <div className="overflow-x-auto rounded-2xl border border-[#E9D8D1]">
+          <table className="w-full text-right text-xs sm:text-sm">
+            <thead className="bg-[#F9F3EC] text-[#351B38]">
+              <tr>
+                <th className="p-3 font-semibold">الرمز</th>
+                <th className="p-3 font-semibold">الأداة والمؤلف</th>
+                <th className="p-3 font-semibold">التصنيف العلمي</th>
+                <th className="p-3 font-semibold">الترخيص وحالة التعريب</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#E9D8D1] text-[#5F4562]">
+              <tr>
+                <td className="p-3 font-semibold text-[#762D50]" dir="ltr">PHQ-9</td>
+                <td className="p-3">Kroenke et al. (2001) — 9 فقرات (0–3)</td>
+                <td className="p-3 font-semibold text-[#351B38]">مقنن مفتوح</td>
+                <td className="p-3">Pfizer Open Access · دراسات عربية منشورة</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-semibold text-[#762D50]" dir="ltr">GAD-7</td>
+                <td className="p-3">Spitzer et al. (2006) — 7 فقرات (0–3)</td>
+                <td className="p-3 font-semibold text-[#351B38]">مقنن مفتوح</td>
+                <td className="p-3">Pfizer Open Access · دراسات عربية منشورة</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-semibold text-[#762D50]" dir="ltr">DASS-21</td>
+                <td className="p-3">Lovibond & Lovibond (1995) — 21 فقرة (×2)</td>
+                <td className="p-3 font-semibold text-[#351B38]">مقنن مفتوح</td>
+                <td className="p-3">UNSW Public Domain · دراسات عربية منشورة</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-semibold text-[#762D50]" dir="ltr">WHO-5</td>
+                <td className="p-3">World Health Organization (1998) — 5 فقرات (×4)</td>
+                <td className="p-3 font-semibold text-[#351B38]">مقنن مفتوح</td>
+                <td className="p-3">CC BY-NC-SA 3.0 IGO · دراسات عربية منشورة</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-semibold text-[#762D50]" dir="ltr">RRS-10</td>
+                <td className="p-3">Treynor, Gonzalez & Nolen-Hoeksema (2003) — 10 فقرات</td>
+                <td className="p-3 font-semibold text-[#351B38]">مقنن بحثي</td>
+                <td className="p-3">مجاني بالإسناد · تعريب مبدئي يحتاج تقنيناً</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-semibold text-[#762D50]" dir="ltr">IPIP-50</td>
+                <td className="p-3">Goldberg IPIP Big-Five (1999) — 50 فقرة</td>
+                <td className="p-3 font-semibold text-[#351B38]">مقنن مفتوح</td>
+                <td className="p-3">Public Domain · تعريب مبدئي يحتاج تقنيناً</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-semibold text-[#762D50]" dir="ltr">RSES-10</td>
+                <td className="p-3">Morris Rosenberg (1965) — 10 فقرات (0–30)</td>
+                <td className="p-3 font-semibold text-[#351B38]">مقنن مفتوح</td>
+                <td className="p-3">مجاني بالإسناد · دراسات عربية منشورة</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-semibold text-[#762D50]" dir="ltr">BRS-6</td>
+                <td className="p-3">Smith et al. (2008) — 6 فقرات (متوسط 1–5)</td>
+                <td className="p-3 font-semibold text-[#351B38]">مقنن بحثي</td>
+                <td className="p-3">مجاني بالإسناد · تعريب مبدئي يحتاج تقنيناً</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-semibold text-[#762D50]" dir="ltr">IRI-28</td>
+                <td className="p-3">Mark H. Davis (1980/1983) — 28 فقرة (4 أبعاد)</td>
+                <td className="p-3 font-semibold text-[#351B38]">مقنن بحثي</td>
+                <td className="p-3">مجاني بالإسناد · تعريب مبدئي يحتاج تقنيناً</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-semibold text-[#762D50]" dir="ltr">SWLS-5</td>
+                <td className="p-3">Diener et al. (1985) — 5 فقرات سباعية (5–35)</td>
+                <td className="p-3 font-semibold text-[#351B38]">مقنن بحثي</td>
+                <td className="p-3">مجاني غير تجاري بالإسناد · دراسات عربية</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-semibold text-[#762D50]" dir="ltr">GSE-10</td>
+                <td className="p-3">Schwarzer & Jerusalem (1995) — 10 فقرات (10–40)</td>
+                <td className="p-3 font-semibold text-[#351B38]">مقنن بحثي</td>
+                <td className="p-3">مجاني بالإسناد · دراسات عربية منشورة</td>
+              </tr>
+              <tr>
+                <td className="p-3 font-semibold text-[#9F7E44]" dir="ltr">EXP-*</td>
+                <td className="p-3">5 وحدات تأمل ذاتي أصلية (التفكير، المشاعر، الحدود، السلوك، الانتباه)</td>
+                <td className="p-3 font-semibold text-[#9F7E44]">استكشافي غير مقنن</td>
+                <td className="p-3">محتوى أصلي لزهرتي — للتأمل الذاتي فقط</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <section className="rounded-3xl border border-[#E9D8D1] bg-[#FFFDF9] p-6 sm:p-8 space-y-4">
         <div className="flex items-center gap-2 text-[#762D50]">

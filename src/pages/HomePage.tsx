@@ -1,58 +1,76 @@
 import React from 'react';
-import { ArrowLeft, Compass, HeartHandshake, Lock, Sparkles, UserCheck } from 'lucide-react';
+import {
+  ArrowLeft,
+  BookOpenCheck,
+  Compass,
+  FileText,
+  Lock,
+  ShieldCheck,
+} from 'lucide-react';
 import {
   CategoryIllustration,
   FloralDivider,
   ZahrtiBlossomMark,
 } from '@/src/components/ornaments/BotanicalArt';
 import { Zahrti3DStage } from '@/src/components/three/Zahrti3DStage';
+import {
+  PSYCH_DOMAIN_ORDER,
+  PSYCH_DOMAINS,
+  PSYCH_INSTRUMENTS_REGISTRY,
+} from '@/src/data/assessments/registry';
 import { MAJORS_CATALOG } from '@/src/data/majors/majorsCatalog';
-import { PersonId } from '@/src/types';
+import { PsychCompletedResult, PsychSessionState } from '@/src/types/psychology';
 
 interface HomePageProps {
   onNavigate: (to: string) => void;
-  activePersonId: PersonId;
-  person1Name: string;
-  person2Name: string;
-  hasCustomNames: boolean;
-  person1Completed: boolean;
-  person2Completed: boolean;
-  person1AnsweredCount: number;
-  person2AnsweredCount: number;
-  onSelectPerson: (personId: PersonId) => void;
+  personalName: string;
+  completedResults: PsychCompletedResult[];
+  sessions: Record<string, PsychSessionState>;
+  hasCareerResult: boolean;
+  careerAnsweredCount: number;
 }
 
 export function HomePage({
   onNavigate,
-  activePersonId,
-  person1Name,
-  person2Name,
-  hasCustomNames,
-  person1Completed,
-  person2Completed,
-  person1AnsweredCount,
-  person2AnsweredCount,
-  onSelectPerson,
+  personalName,
+  completedResults,
+  sessions,
+  hasCareerResult,
+  careerAnsweredCount,
 }: HomePageProps) {
+  const playableInstruments = PSYCH_INSTRUMENTS_REGISTRY.filter(
+    (item) => item.scientificStatus !== 'requires_license_reference'
+  );
+  const completedSet = new Set(completedResults.map((r) => r.instrumentId));
+  if (hasCareerResult) completedSet.add('onet-mini-ip');
+
+  const inProgressEntry = Object.values(sessions).find(
+    (s) => Object.keys(s.answers).length > 0
+  );
+
+  const featuredIds = [
+    'phq-9',
+    'gad-7',
+    'who-5',
+    'ipip-big5-50',
+    'brs-6',
+    'swls-5',
+  ];
+  const featuredInstruments = featuredIds
+    .map((id) => PSYCH_INSTRUMENTS_REGISTRY.find((s) => s.id === id))
+    .filter((s): s is NonNullable<typeof s> => Boolean(s));
+
   const spotlightMajors = [
     MAJORS_CATALOG.find((m) => m.id === 'general-medicine'),
     MAJORS_CATALOG.find((m) => m.id === 'computer-science'),
     MAJORS_CATALOG.find((m) => m.id === 'graphic-design'),
   ].filter(Boolean);
 
-  // Progressive 3D bloom reflects real overall journey completion
-  const totalAnswered = person1AnsweredCount + person2AnsweredCount;
-  const bloomProgress = Math.max(0.38, Math.min(1, 0.38 + (totalAnswered / 60) * 0.62));
-  const bothReady = person1Completed && person2Completed;
-
-  const openPersonJourney = (personId: PersonId, completed: boolean) => {
-    onSelectPerson(personId);
-    if (!hasCustomNames) {
-      onNavigate('/intro');
-      return;
-    }
-    onNavigate(completed ? '/results' : '/quiz');
-  };
+  const completionRatio =
+    playableInstruments.length > 0
+      ? completedSet.size / playableInstruments.length
+      : 0;
+  const bloomProgress = Math.max(0.42, Math.min(1, 0.42 + completionRatio * 0.58));
 
   return (
     <div>
@@ -64,66 +82,75 @@ export function HomePage({
             <div className="lg:col-span-6 space-y-6">
               <div className="flex items-center gap-2.5 text-xs tracking-wide text-[#C6A56B]">
                 <ZahrtiBlossomMark className="h-5 w-5" />
-                <span>زهرتي — <span dir="ltr">ZAHRTI</span> · استكشاف الميول والتوافق</span>
+                <span>
+                  زهرتي — <span dir="ltr">ZAHRTI</span> · مساحة فهم الذات والصحة النفسية
+                </span>
               </div>
 
-              <h1 className="font-display text-3xl sm:text-4xl lg:text-[2.95rem] font-bold leading-[1.7] text-[#F9F3EC]">
-                اكتشفي التخصص اللي يشبهج،{' '}
+              <h1 className="font-display text-3xl sm:text-4xl lg:text-[2.85rem] font-bold leading-[1.68] text-[#F9F3EC]">
+                {personalName ? `أهلاً ${personalName} في مساحتكِ، ` : 'مساحتكِ الهادئة '}
                 <span className="block sm:inline text-[#C47C91]">
-                  واكتشفا نقطة التقاء شخصيتيكما
+                  لفهم شخصيتكِ ومشاعركِ وميولكِ
                 </span>
               </h1>
 
               <p className="text-base sm:text-lg leading-relaxed text-[#E9D8D1]/90 max-w-xl">
-                تجربة هادئة وموثقة مبنية على مقياس الاهتمامات المهنية (
-                <span dir="ltr" className="inline-block">
-                  O*NET Mini-IP
-                </span>
-                ): يخوض كل طرف اختباره بخصوصية تامة، ليستكشف مساراته الجامعية أو تلتقي نتائجكما في
-                صفحة التوافق وعالمنا.
+                منصة نفسية واستكشافية متكاملة مخصصة لكِ وحدكِ: تجمع مقاييس علمية مفتوحة المصدر
+                للشخصية والقلق والمزاج والمرونة والرضا، مع تجربة سؤال واحد في كل شاشة وتقرير عربي
+                شامل قابل للحفظ والطباعة <span dir="ltr">PDF</span>.
               </p>
 
-              {/* Personalized Action Row */}
+              {/* Primary Single-User Action Row */}
               <div className="flex flex-wrap items-center gap-3.5 pt-1">
                 <button
                   type="button"
-                  onClick={() => onNavigate('/intro')}
+                  onClick={() =>
+                    onNavigate(
+                      inProgressEntry
+                        ? `/assessment/${inProgressEntry.instrumentId}/play`
+                        : '/library'
+                    )
+                  }
                   className="inline-flex min-h-[48px] items-center gap-2.5 rounded-full bg-[#762D50] px-7 py-3 text-sm sm:text-base font-medium text-[#F9F3EC] border border-[#C6A56B]/35 transition-colors hover:bg-[#8E3862] cursor-pointer"
                 >
                   <span>
-                    {hasCustomNames
-                      ? `متابعة رحلة ${activePersonId === 'person1' ? person1Name : person2Name}`
-                      : 'إعداد الأسماء والبدء'}
+                    {inProgressEntry ? 'استكمال الجلسة المحفوظة' : 'استكشفي مكتبة الاختبارات'}
                   </span>
                   <ArrowLeft className="h-4 w-4" aria-hidden="true" />
                 </button>
 
                 <button
                   type="button"
-                  onClick={() => onNavigate(bothReady ? '/compatibility' : '/majors')}
+                  onClick={() => onNavigate(completedSet.size > 0 ? '/report' : '/intro')}
                   className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-[#E9D8D1]/35 px-6 py-3 text-sm sm:text-base font-medium text-[#F9F3EC] transition-colors hover:bg-[#4B2B4E] cursor-pointer"
                 >
-                  <span>{bothReady ? 'عرض التوافق المشترك' : 'تصفحي دليل التخصصات'}</span>
+                  <span>
+                    {completedSet.size > 0
+                      ? 'فتح التقرير النفسي الشامل'
+                      : careerAnsweredCount > 0 && careerAnsweredCount < 30
+                      ? 'متابعة اختبار التخصصات'
+                      : 'اختبار الميول المهنية'}
+                  </span>
                 </button>
               </div>
 
               {/* Clean Metric Baseline */}
               <dl className="grid grid-cols-3 gap-4 border-t border-[#C6A56B]/20 pt-6 text-xs sm:text-sm">
                 <div>
-                  <dt className="text-[#E9D8D1]/70">عدد الأسئلة</dt>
+                  <dt className="text-[#E9D8D1]/70">أدوات المكتبة المتاحة</dt>
                   <dd className="font-display text-lg font-bold text-[#F9F3EC] tabular-nums mt-0.5">
-                    30 فقرة
+                    {playableInstruments.length} أداة
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[#E9D8D1]/70">الزمن التقريبي</dt>
-                  <dd className="font-display text-lg font-bold text-[#F9F3EC] tabular-nums mt-0.5">
-                    4 دقائق
+                  <dt className="text-[#E9D8D1]/70">المنجز في ملفكِ</dt>
+                  <dd dir="ltr" className="font-display text-lg font-bold text-[#C6A56B] tabular-nums mt-0.5 inline-block">
+                    {completedSet.size} / {playableInstruments.length}
                   </dd>
                 </div>
                 <div>
                   <dt className="text-[#E9D8D1]/70">التخصصات الموثقة</dt>
-                  <dd className="font-display text-lg font-bold text-[#C6A56B] tabular-nums mt-0.5">
+                  <dd className="font-display text-lg font-bold text-[#F9F3EC] tabular-nums mt-0.5">
                     {MAJORS_CATALOG.length} تخصصاً
                   </dd>
                 </div>
@@ -137,146 +164,133 @@ export function HomePage({
                 darkSurface
                 bloomProgress={bloomProgress}
                 heightClass="h-[310px] sm:h-[380px] lg:h-[420px]"
-                hintText="زهرة زهرتي تتفتح تدريجياً مع تقدمكما في استكشاف اهتماماتكما · حرّكي المؤشر للتأمل"
+                hintText="زهرة زهرتي تتفتح تدريجياً مع كل مقياس تنهينه في رحلتكِ"
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Two-Person Private Journey Entry Section */}
-      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 space-y-8">
+      {/* Psychological Domains Overview Section */}
+      <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 space-y-10">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#E9D8D1] pb-5">
           <div className="space-y-1.5">
             <p className="text-xs font-semibold tracking-wider text-[#762D50]">
-              مساران مستقلان · نتيجة مشتركة
+              رحلة فهم الذات الشاملة · حساب شخصي واحد
             </p>
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#351B38]">
-              {hasCustomNames
-                ? `رحلة ${person1Name} و${person2Name} في زهرتي`
-                : 'ابدآ بتحديد الأسماء ثم يخوض كل طرف اختباره باستقلال'}
+              ثمانية مجالات للاكتشاف النفسي والمهني بخصوصية تامة
             </h2>
           </div>
           <button
             type="button"
-            onClick={() => onNavigate('/intro')}
+            onClick={() => onNavigate('/library')}
             className="text-sm font-semibold text-[#762D50] hover:underline whitespace-nowrap cursor-pointer"
           >
-            {hasCustomNames ? 'تعديل الأسماء أو تبديل الجلسة' : 'إدخال الاسمين الآن'}
+            دخول المكتبة الكاملة ({PSYCH_INSTRUMENTS_REGISTRY.length})
           </button>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {/* Person 1 Panel */}
-          <article className="rounded-2xl border border-[#E9D8D1] bg-[#FFFDF9] p-6 flex flex-col justify-between gap-5">
-            <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs text-[#6F5472]">
-                <span className="font-semibold text-[#762D50]">المسار الأول</span>
-                <UserCheck className="h-4 w-4 text-[#C6A56B]" aria-hidden="true" />
-              </div>
-              <h3 className="font-display text-xl font-bold text-[#351B38]">
-                {person1Name}
-              </h3>
-              <p className="text-sm leading-relaxed text-[#5F4562] tabular-nums">
-                {person1Completed
-                  ? 'اكتمل الاختبار الشخصي وجاهز لعرض التخصصات المقترحة.'
-                  : person1AnsweredCount > 0
-                  ? `تمت الإجابة على ${person1AnsweredCount} من 30 فقرة.`
-                  : 'جلسة مستقلة ومحفوظة محلياً؛ لم يبدأ الاختبار بعد.'}
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => openPersonJourney('person1', person1Completed)}
-              className="w-full min-h-[44px] rounded-full bg-[#351B38] px-5 py-2.5 text-sm font-medium text-[#F9F3EC] hover:bg-[#4B2B4E] transition-colors cursor-pointer"
-            >
-              {person1Completed
-                ? `نتيجة ${person1Name}`
-                : person1AnsweredCount > 0
-                ? 'متابعة الاختبار'
-                : 'بدء اختبار الطرف الأول'}
-            </button>
-          </article>
-
-          {/* Person 2 Panel */}
-          <article className="rounded-2xl border border-[#E9D8D1] bg-[#FFFDF9] p-6 flex flex-col justify-between gap-5">
-            <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs text-[#6F5472]">
-                <span className="font-semibold text-[#762D50]">المسار الثاني</span>
-                <UserCheck className="h-4 w-4 text-[#C47C91]" aria-hidden="true" />
-              </div>
-              <h3 className="font-display text-xl font-bold text-[#351B38]">
-                {person2Name}
-              </h3>
-              <p className="text-sm leading-relaxed text-[#5F4562] tabular-nums">
-                {person2Completed
-                  ? 'اكتمل الاختبار الشخصي وجاهز لعرض التخصصات المقترحة.'
-                  : person2AnsweredCount > 0
-                  ? `تمت الإجابة على ${person2AnsweredCount} من 30 فقرة.`
-                  : 'جلسة منفصلة تماماً عن المسار الأول؛ لم يبدأ الاختبار بعد.'}
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => openPersonJourney('person2', person2Completed)}
-              className="w-full min-h-[44px] rounded-full bg-[#762D50] px-5 py-2.5 text-sm font-medium text-[#F9F3EC] hover:bg-[#5D223E] transition-colors cursor-pointer"
-            >
-              {person2Completed
-                ? `نتيجة ${person2Name}`
-                : person2AnsweredCount > 0
-                ? 'متابعة الاختبار'
-                : 'بدء اختبار الطرف الثاني'}
-            </button>
-          </article>
-
-          {/* Compatibility & Our World Gate Panel */}
-          <article className="rounded-2xl border border-[#C6A56B]/55 bg-gradient-to-br from-[#F9F3EC] to-[#F3E7DF] p-6 flex flex-col justify-between gap-5">
-            <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs text-[#6F5472]">
-                <span className="font-semibold text-[#9F7E44]">المساحة المشتركة</span>
-                {bothReady ? (
-                  <HeartHandshake className="h-4 w-4 text-[#762D50]" aria-hidden="true" />
-                ) : (
-                  <Lock className="h-4 w-4 text-[#9F7E44]" aria-hidden="true" />
-                )}
-              </div>
-              <h3 className="font-display text-xl font-bold text-[#351B38]">
-                التوافق وعالمنا
-              </h3>
-              <p className="text-sm leading-relaxed text-[#5F4562]">
-                {bothReady
-                  ? 'اكتمل المساران. يمكنكُما الآن استعراض تحليل التوافق الثلاثي الأبعاد وصفحة عالمنا.'
-                  : 'يُفتح تحليل التوافق وصفحة عالمنا تلقائياً فور إكمال الطرفين لاختبارهما، دون عرض إجابات أحدهما للآخر.'}
-              </p>
-            </div>
-            <div className="flex gap-2">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {PSYCH_DOMAIN_ORDER.map((dId) => {
+            const info = PSYCH_DOMAINS[dId];
+            return (
               <button
+                key={dId}
                 type="button"
-                onClick={() => onNavigate('/compatibility')}
-                className="flex-1 min-h-[44px] rounded-full border border-[#351B38] bg-transparent px-4 py-2 text-sm font-medium text-[#351B38] hover:bg-[#351B38] hover:text-[#F9F3EC] transition-colors cursor-pointer"
+                onClick={() => onNavigate('/library')}
+                className="text-right rounded-2xl border border-[#E9D8D1] bg-[#FFFDF9] p-5 space-y-2 hover:border-[#762D50]/60 transition-colors cursor-pointer"
               >
-                التوافق
+                <p dir="ltr" className="text-[11px] font-medium text-[#9F7E44] text-right">
+                  {info.nameEn}
+                </p>
+                <h3 className="font-display text-lg font-bold text-[#351B38]">{info.nameAr}</h3>
+                <p className="text-xs leading-relaxed text-[#5F4562]">{info.shortDescAr}</p>
               </button>
-              <button
-                type="button"
-                onClick={() => onNavigate('/our-world')}
-                className="flex-1 min-h-[44px] rounded-full border border-[#762D50]/50 bg-[#FFFDF9] px-4 py-2 text-sm font-medium text-[#762D50] hover:bg-[#762D50] hover:text-[#F9F3EC] transition-colors cursor-pointer"
-              >
-                عالمنا
-              </button>
-            </div>
-          </article>
+            );
+          })}
         </div>
 
         <FloralDivider />
 
-        {/* Architectural Discipline Spotlight */}
+        {/* Featured Validated Open-Access Assessments */}
         <section className="space-y-6">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="space-y-1">
-              <p className="text-xs font-semibold text-[#762D50]">دليل التخصصات الجامعية</p>
+              <p className="text-xs font-semibold text-[#762D50]">أبرز المقاييس العلمية المفتوحة</p>
               <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#351B38]">
-                استكشفي التخصصات مع إمكانية الحفظ والمقارنة
+                ابدئي من مقياس موثوق يناسب سؤالكِ اليوم
+              </h2>
+            </div>
+            <button
+              type="button"
+              onClick={() => onNavigate('/report')}
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#762D50] hover:underline cursor-pointer"
+            >
+              <FileText className="h-4 w-4" aria-hidden="true" />
+              <span>التقرير النفسي الشامل (PDF)</span>
+            </button>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {featuredInstruments.map((spec) => {
+              const isDone = completedSet.has(spec.id);
+              return (
+                <article
+                  key={spec.id}
+                  className="rounded-2xl border border-[#E9D8D1] bg-[#FFFDF9] p-6 flex flex-col justify-between gap-4 hover:border-[#762D50]/50 transition-colors"
+                >
+                  <div className="space-y-2.5">
+                    <div className="flex items-center justify-between text-xs text-[#6F5472]">
+                      <span dir="ltr" className="font-semibold text-[#762D50]">
+                        {spec.shortCode}
+                      </span>
+                      <span className="tabular-nums">
+                        {spec.questionCount} فقرة · {spec.estimatedMinutes} د
+                      </span>
+                    </div>
+                    <h3 className="font-display text-lg font-bold text-[#351B38]">
+                      {spec.titleAr}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-[#5F4562] line-clamp-3">
+                      {spec.shortDescriptionAr}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-2 pt-1">
+                    <button
+                      type="button"
+                      onClick={() => onNavigate(`/assessment/${spec.id}`)}
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#762D50] hover:underline cursor-pointer"
+                    >
+                      <span>{isDone ? 'عرض التفاصيل أو الإعادة' : 'بدء المقياس'}</span>
+                      <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
+                    </button>
+                    {isDone && (
+                      <button
+                        type="button"
+                        onClick={() => onNavigate(`/assessment/${spec.id}/result`)}
+                        className="text-xs font-semibold text-[#351B38] hover:underline cursor-pointer"
+                      >
+                        النتيجة ✓
+                      </button>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+        <FloralDivider />
+
+        {/* Architectural Discipline Spotlight (Majors Preserved!) */}
+        <section className="space-y-6">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div className="space-y-1">
+              <p className="text-xs font-semibold text-[#762D50]">الميول المهنية والتخصصات</p>
+              <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#351B38]">
+                دليل التخصصات الجامعية واختبار <span dir="ltr">O*NET Mini-IP</span>
               </h2>
             </div>
             <button
@@ -322,33 +336,36 @@ export function HomePage({
           </div>
         </section>
 
-        {/* Quiet 3-pillar editorial closure */}
+        {/* Quiet 3-pillar Scientific Integrity Closure */}
         <section className="rounded-2xl border border-[#E9D8D1] bg-[#FFFDF9] p-6 sm:p-8 grid gap-6 md:grid-cols-3 text-sm">
           <div className="space-y-1.5">
             <div className="flex items-center gap-2 text-[#762D50] font-display font-bold text-base">
-              <Sparkles className="h-4 w-4 text-[#C6A56B]" aria-hidden="true" />
-              <span>ترتيب واقعي للتخصصات</span>
+              <BookOpenCheck className="h-4 w-4 text-[#C6A56B]" aria-hidden="true" />
+              <span>أدوات معيارية وشفافية علمية</span>
             </div>
             <p className="leading-relaxed text-[#5F4562]">
-              نرتب لكِ الأنسب أولاً ثم البدائل المناسبة، مع نسبة توافق محسوبة رياضياً وسبب واضح لكل خيار.
+              نلتزم بالمعادلات الأصلية للمقاييس المفتوحة ونفصل بوضوح بين الأدوات المقننة والوحدات
+              الاستكشافية دون نسخ نصوص محمية.
             </p>
           </div>
           <div className="space-y-1.5">
             <div className="flex items-center gap-2 text-[#762D50] font-display font-bold text-base">
               <Lock className="h-4 w-4 text-[#C6A56B]" aria-hidden="true" />
-              <span>فصل تام وخصوصية محلية</span>
+              <span>مساحة فردية محفوظة محلياً</span>
             </div>
             <p className="leading-relaxed text-[#5F4562]">
-              ملف كل طرف محفوظ بصورة مستقلة في هذا المتصفح، ولا تفتح مساحة التوافق إلا بعد إكمال الطرفين.
+              كل إجاباتج وتقاريرج تُحفظ محلياً في متصفحج فقط بدون تسجيل إلزامي أو إرسال لخوادم
+              خارجية.
             </p>
           </div>
           <div className="space-y-1.5">
             <div className="flex items-center gap-2 text-[#762D50] font-display font-bold text-base">
-              <Compass className="h-4 w-4 text-[#C6A56B]" aria-hidden="true" />
-              <span>توجيه بلا أحكام حتمية</span>
+              <ShieldCheck className="h-4 w-4 text-[#C6A56B]" aria-hidden="true" />
+              <span>رعاية وسلامة بلا تشخيص طبي</span>
             </div>
             <p className="leading-relaxed text-[#5F4562]">
-              اختبار زهرتي أداة تأمل واستكشاف أولية تدعم قراركِ الواعي، ولا تقيد مستقبلج بتصنيف واحد.
+              زهرتي منصة وعي وتثقيف لا تصدر تشخيصاً سريرياً، وتوفر تنبيهات دعم إنسانية مسؤولة عند
+              مؤشرات الضيق المرتفع.
             </p>
           </div>
         </section>

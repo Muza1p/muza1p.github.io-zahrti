@@ -375,6 +375,9 @@ export function useAssessment() {
         const isStaticHost =
           typeof window !== 'undefined' &&
           (window.location.hostname.endsWith('github.io') ||
+            window.location.hostname.endsWith('netlify.app') ||
+            window.location.hostname.endsWith('pages.dev') ||
+            window.location.hostname.endsWith('vercel.app') ||
             window.location.protocol === 'file:');
 
         if (forceLocalFallback || isStaticHost) {

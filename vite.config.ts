@@ -4,9 +4,9 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig(({ command }) => {
-  // Explicit repository subpath for GitHub Pages production builds.
-  // Defaults to /muza1p.github.io-zahrti/; can be overridden via VITE_BASE_PATH if forked/renamed.
-  const prodBase = process.env.VITE_BASE_PATH || '/muza1p.github.io-zahrti/';
+  // Default to './' for production builds so assets load cleanly on root domains
+  // (Netlify, Cloudflare Pages, custom domains) AND subpath hosts (GitHub Pages under any repo name).
+  const prodBase = process.env.VITE_BASE_PATH || './';
 
   return {
     base: command === 'build' ? prodBase : '/',

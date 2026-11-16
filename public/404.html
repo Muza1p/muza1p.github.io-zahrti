@@ -5,22 +5,24 @@
     <title>ZAHRTI — إعادة التوجيه</title>
     <script>
       (function () {
-        var base = '/muza1p.github.io-zahrti/';
         var pathname = window.location.pathname || '/';
+        // Do not redirect missing static asset files
+        if (/\.(js|mjs|css|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|json|pdf|map)$/i.test(pathname)) {
+          return;
+        }
+        var base = '/';
         var route = pathname;
-        if (pathname.indexOf(base) === 0) {
-          route = '/' + pathname.slice(base.length);
-        } else {
-          // Handle fork/custom repo subpaths dynamically: preserve first segment if hosted on *.github.io
-          var segments = pathname.split('/').filter(Boolean);
-          if (segments.length > 0 && window.location.hostname.endsWith('github.io')) {
-            base = '/' + segments[0] + '/';
-            route = '/' + segments.slice(1).join('/');
-          }
+        var segments = pathname.split('/').filter(Boolean);
+        // On GitHub Pages project sites (username.github.io/repo-name/...), preserve the repo segment
+        if (window.location.hostname.endsWith('github.io') && segments.length > 0) {
+          base = '/' + segments[0] + '/';
+          route = '/' + segments.slice(1).join('/');
         }
         var search = window.location.search || '';
-        var cleanRoute = route === '/' ? '' : route.replace(/^\/+/, '');
-        window.location.replace(base + '#/' + cleanRoute + search);
+        var hash = window.location.hash || '';
+        var cleanRoute = route === '/' || route === '/index.html' ? '' : route.replace(/^\/+/, '');
+        var targetHash = hash && hash.length > 1 ? hash : '#/' + cleanRoute;
+        window.location.replace(base + targetHash + search);
       })();
     </script>
   </head>

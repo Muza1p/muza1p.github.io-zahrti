@@ -99,6 +99,7 @@ export default function Zahrti3DCanvas({
     const renderer = new THREE.WebGLRenderer({
       antialias: !isSoftwareGl,
       alpha: true,
+      preserveDrawingBuffer: true,
       powerPreference: 'high-performance',
     });
     renderer.setPixelRatio(isSoftwareGl ? 1 : Math.min(window.devicePixelRatio || 1, 2));

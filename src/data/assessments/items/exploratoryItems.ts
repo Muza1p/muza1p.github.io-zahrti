@@ -1,0 +1,387 @@
+import { PsychQuestion } from '@/src/types/psychology';
+
+export const EXPLORATORY_ITEMS_BY_ID: Record<string, PsychQuestion[]> = {
+  // Original ZAHRTI Exploratory Reflection: Thinking Style, Decisions & Self-Awareness (12 items, 1..5)
+  'explore-thinking-decisions': [
+    {
+      id: 'etd_1',
+      orderIndex: 1,
+      subscaleId: 'analytical_thinking',
+      textAr: 'قبل أن أحسم قراراً مهماً، أجمع الحقائق والبدائل وأقارن نتائجها بهدوء.',
+    },
+    {
+      id: 'etd_2',
+      orderIndex: 2,
+      subscaleId: 'needs_awareness',
+      textAr: 'أعرف غالباً السبب الحقيقي وراء ضيقي أو ارتياحي دون أن أخلط بين السبب والنتيجة.',
+    },
+    {
+      id: 'etd_3',
+      orderIndex: 3,
+      subscaleId: 'decision_clarity',
+      reverseScored: true,
+      textAr: 'أتردد طويلاً حتى بعد دراسة الخيارات، وأخشى الندم إن اخترتُ أحدها.',
+    },
+    {
+      id: 'etd_4',
+      orderIndex: 4,
+      subscaleId: 'analytical_thinking',
+      textAr: 'أستطيع تقسيم المشكلة المعقدة إلى خطوات صغيرة واضحة يسهل التعامل معها.',
+    },
+    {
+      id: 'etd_5',
+      orderIndex: 5,
+      subscaleId: 'needs_awareness',
+      textAr: 'أنتبه لقيمي الشخصية وأولوياتي قبل أن أوافق على طلبات الآخرين.',
+    },
+    {
+      id: 'etd_6',
+      orderIndex: 6,
+      subscaleId: 'decision_clarity',
+      textAr: 'أتحمل نتائج قراراتي بنضج وأستخلص منها ما يساعدني في المرات القادمة.',
+    },
+    {
+      id: 'etd_7',
+      orderIndex: 7,
+      subscaleId: 'analytical_thinking',
+      reverseScored: true,
+      textAr: 'أميل أحياناً للحكم السريع وقت الانفعال ثم أتمنى لو انتظرتُ قليلاً.',
+    },
+    {
+      id: 'etd_8',
+      orderIndex: 8,
+      subscaleId: 'needs_awareness',
+      textAr: 'ألاحظ التغيّر في طاقتي وحدودي الذهنية قبل أن أصل إلى مرحلة الإرهاق الكامل.',
+    },
+    {
+      id: 'etd_9',
+      orderIndex: 9,
+      subscaleId: 'decision_clarity',
+      textAr: 'أوازن بين رأيي الداخلي واستشارة من أثق بحكمتهم دون أن أتخلى عن قناعتي.',
+    },
+    {
+      id: 'etd_10',
+      orderIndex: 10,
+      subscaleId: 'analytical_thinking',
+      textAr: 'عندما أسمع رأياً مختلفاً، أميّز بين الحقائق الموضوعية وبين الافتراضات الشخصية.',
+    },
+    {
+      id: 'etd_11',
+      orderIndex: 11,
+      subscaleId: 'needs_awareness',
+      reverseScored: true,
+      textAr: 'يمرّ الوقت أحياناً دون أن أدرك ما الذي أحتاجه فعلاً لاستعادة توازني.',
+    },
+    {
+      id: 'etd_12',
+      orderIndex: 12,
+      subscaleId: 'decision_clarity',
+      textAr: 'حين يظهر معطى جديد يثبت خطأ خيار قديم، أملك الشجاعة لتعديل خطتي بهدوء.',
+    },
+  ],
+
+  // Original ZAHRTI Exploratory Reflection: Emotional Awareness & Regulation (12 items, 1..4)
+  'explore-emotional-regulation': [
+    {
+      id: 'eer_1',
+      orderIndex: 1,
+      subscaleId: 'emotional_awareness',
+      textAr: 'عندما يتغير مزاجي فجأة، أستطيع تسمية الشعور الدقيق (قلق، خيبة، غضب، إرهاق).',
+    },
+    {
+      id: 'eer_2',
+      orderIndex: 2,
+      subscaleId: 'regulation_calm',
+      textAr: 'أستطيع تهدئة نفسي بخطوة عملية (تنفس، مشي، تأجيل الرد) عند اشتداد الغضب.',
+    },
+    {
+      id: 'eer_3',
+      orderIndex: 3,
+      subscaleId: 'healthy_expression',
+      reverseScored: true,
+      textAr: 'أكبت مشاعري وأصمت طويلاً ثم تخرج بصورة حادة أو مرهقة لاحقاً.',
+    },
+    {
+      id: 'eer_4',
+      orderIndex: 4,
+      subscaleId: 'stress_coping',
+      textAr: 'أعرف ما الذي يساعدني فعلاً على تفريغ ضغط اليوم دون إيذاء نفسي أو غيري.',
+    },
+    {
+      id: 'eer_5',
+      orderIndex: 5,
+      subscaleId: 'emotional_awareness',
+      textAr: 'أنتبه إلى الإشارات الجسدية لمشاعري مثل شد الكتفين أو ثقل الصدر عند القلق.',
+    },
+    {
+      id: 'eer_6',
+      orderIndex: 6,
+      subscaleId: 'regulation_calm',
+      reverseScored: true,
+      textAr: 'يغلبني الانفعال اللحظي فأقول أو أفعل ما لا يعكس قيمي الهادئة.',
+    },
+    {
+      id: 'eer_7',
+      orderIndex: 7,
+      subscaleId: 'healthy_expression',
+      textAr: 'أعبّر عمّا يضايقني بكلمات واضحة ومحترمة دون اتهام أو انسحاب صامت.',
+    },
+    {
+      id: 'eer_8',
+      orderIndex: 8,
+      subscaleId: 'stress_coping',
+      textAr: 'أمنح نفسي الحق في الحزن أو البكاء المؤقت دون أن أتهم نفسي بالضعف.',
+    },
+    {
+      id: 'eer_9',
+      orderIndex: 9,
+      subscaleId: 'emotional_awareness',
+      textAr: 'أفرّق بين الخوف الواقعي الذي يحميني وبين القلق التخيّلي المبالغ فيه.',
+    },
+    {
+      id: 'eer_10',
+      orderIndex: 10,
+      subscaleId: 'regulation_calm',
+      textAr: 'بعد موقف مخيف أو محزن، أستطيع إعادة توجيه تركيزي لما هو بيدي الآن.',
+    },
+    {
+      id: 'eer_11',
+      orderIndex: 11,
+      subscaleId: 'healthy_expression',
+      textAr: 'أستطيع طلب المساندة المعنوية من شخص موثوق عندما يثقل عليّ الحمل.',
+    },
+    {
+      id: 'eer_12',
+      orderIndex: 12,
+      subscaleId: 'stress_coping',
+      reverseScored: true,
+      textAr: 'يبقى أثر الإحباط أو الزعل مسيطراً على أيامي لأكثر مما أرغب.',
+    },
+  ],
+
+  // Original ZAHRTI Exploratory Reflection: Relationships & Boundaries (12 items, 1..5)
+  'explore-relationships-boundaries': [
+    {
+      id: 'erb_1',
+      orderIndex: 1,
+      subscaleId: 'boundaries',
+      textAr: 'أستطيع قول «لا» بأدب عندما يتجاوز الطلب قدرتي أو وقتي دون شعور زائد بالذنب.',
+    },
+    {
+      id: 'erb_2',
+      orderIndex: 2,
+      subscaleId: 'trust_security',
+      textAr: 'أشعر بقدر مريح من الأمان والاطمئنان في علاقاتي القريبة دون شك دائم.',
+    },
+    {
+      id: 'erb_3',
+      orderIndex: 3,
+      subscaleId: 'rejection_sensitivity',
+      textAr: 'عندما يتأخر شخص عزيز في الرد، أميل للقلق من أنني أخطأتُ أو أنه لم يعد يهتم.',
+    },
+    {
+      id: 'erb_4',
+      orderIndex: 4,
+      subscaleId: 'conflict_dialogue',
+      textAr: 'أثناء الخلاف، أحرص على فهم قصد الطرف الآخر بدلاً من فرض الانتصار.',
+    },
+    {
+      id: 'erb_5',
+      orderIndex: 5,
+      subscaleId: 'boundaries',
+      reverseScored: true,
+      textAr: 'أوافق غالباً على أمور لا تناسبني فقط لتجنّب غضب الآخرين أو زعلهم.',
+    },
+    {
+      id: 'erb_6',
+      orderIndex: 6,
+      subscaleId: 'trust_security',
+      textAr: 'أوازن بين القرب العاطفي الدافئ وبين الحفاظ على مساحتي واهتماماتي المستقلة.',
+    },
+    {
+      id: 'erb_7',
+      orderIndex: 7,
+      subscaleId: 'rejection_sensitivity',
+      textAr: 'تؤلمني الملاحظات النقدية السريعة أكثر من المتوقع وأظل أفكر في معناها.',
+    },
+    {
+      id: 'erb_8',
+      orderIndex: 8,
+      subscaleId: 'conflict_dialogue',
+      reverseScored: true,
+      textAr: 'أنسحب من الحوار أو ألتزم الصمت البارد كلما احتدم النقاش في علاقة مهمة.',
+    },
+    {
+      id: 'erb_9',
+      orderIndex: 9,
+      subscaleId: 'boundaries',
+      textAr: 'أُوضّح ما يزعجني بهدوء من البداية قبل أن يتراكم في داخلي.',
+    },
+    {
+      id: 'erb_10',
+      orderIndex: 10,
+      subscaleId: 'trust_security',
+      reverseScored: true,
+      textAr: 'أجد صعوبة في إظهار ضعفي أو حاجتي للدعم حتى أمام أقرب الناس إليّ.',
+    },
+    {
+      id: 'erb_11',
+      orderIndex: 11,
+      subscaleId: 'rejection_sensitivity',
+      textAr: 'أشعر أحياناً بالغيرة أو التهديد بسهولة إذا شعرتُ أن اهتمام من أحبهم يتوزع.',
+    },
+    {
+      id: 'erb_12',
+      orderIndex: 12,
+      subscaleId: 'conflict_dialogue',
+      textAr: 'أستطيع الاعتذار الصادق إذا تبين لي أنني جرحتُ شخصاً دون مبرر.',
+    },
+  ],
+
+  // Original ZAHRTI Exploratory Reflection: Habits, Procrastination & Discipline (12 items, 1..4)
+  'explore-habits-discipline': [
+    {
+      id: 'ehd_1',
+      orderIndex: 1,
+      subscaleId: 'time_discipline',
+      textAr: 'أبدأ بالمهام المهمة في وقتها المخطط له دون انتظار اللحظة الأخيرة.',
+    },
+    {
+      id: 'ehd_2',
+      orderIndex: 2,
+      subscaleId: 'anti_procrastination',
+      reverseScored: true,
+      textAr: 'أؤجّل البدء في الأعمال الكبيرة لأنني أخشى ألا تخرج بصورة مثالية.',
+    },
+    {
+      id: 'ehd_3',
+      orderIndex: 3,
+      subscaleId: 'responsibility',
+      textAr: 'عندما أخطئ أو أفشل في هدف، أبحث عمّا يمكن تعديله بدلاً من لوم الظروف فقط.',
+    },
+    {
+      id: 'ehd_4',
+      orderIndex: 4,
+      subscaleId: 'habit_consistency',
+      textAr: 'لدي روتين يومي بسيط ومستمر يساعدني على إنجاز التزاماتي الأساسية.',
+    },
+    {
+      id: 'ehd_5',
+      orderIndex: 5,
+      subscaleId: 'time_discipline',
+      textAr: 'أقسّم يومي وفق الأولويات الحقيقية لا وفق ما يبدو سهلاً أو سريعاً.',
+    },
+    {
+      id: 'ehd_6',
+      orderIndex: 6,
+      subscaleId: 'anti_procrastination',
+      reverseScored: true,
+      textAr: 'أهرب نحو الهاتف أو التصفح السريع كلما شعرتُ بثقل مهمة تحتاج تركيزاً.',
+    },
+    {
+      id: 'ehd_7',
+      orderIndex: 7,
+      subscaleId: 'responsibility',
+      textAr: 'أفي بالوعود والمواعيد التي أقطعها لنفسي وللآخرين بجدية.',
+    },
+    {
+      id: 'ehd_8',
+      orderIndex: 8,
+      subscaleId: 'habit_consistency',
+      reverseScored: true,
+      textAr: 'أتحمّس لخطة جديدة لأيام قليلة ثم أتركها تماماً عند أول انشغال.',
+    },
+    {
+      id: 'ehd_9',
+      orderIndex: 9,
+      subscaleId: 'time_discipline',
+      textAr: 'أراجع أسبوعي بواقعية وأُخرج من جدولي ما لم يعد يخدمني.',
+    },
+    {
+      id: 'ehd_10',
+      orderIndex: 10,
+      subscaleId: 'anti_procrastination',
+      textAr: 'أجزّئ المهمة الثقيلة إلى أول عشر دقائق فقط حتى أكسر حاجز البدء.',
+    },
+    {
+      id: 'ehd_11',
+      orderIndex: 11,
+      subscaleId: 'responsibility',
+      reverseScored: true,
+      textAr: 'أجد صعوبة في تقبّل التعثر المؤقت فأميل للتوقف كلياً بعد خطأ واحد.',
+    },
+    {
+      id: 'ehd_12',
+      orderIndex: 12,
+      subscaleId: 'habit_consistency',
+      textAr: 'أوازن بين الجدية في الإنجاز وبين الراحة والنوم المنتظمين.',
+    },
+  ],
+
+  // Original ZAHRTI Exploratory Reflection: Attention, Organization & Mental Flexibility (10 items, 1..4)
+  'explore-cognitive-focus': [
+    {
+      id: 'ecf_1',
+      orderIndex: 1,
+      subscaleId: 'sustained_focus',
+      textAr: 'أستطيع الاستغراق في قراءة أو عمل واحد مدة نصف ساعة دون تنقل متكرر بين الشاشات.',
+    },
+    {
+      id: 'ecf_2',
+      orderIndex: 2,
+      subscaleId: 'memory_organization',
+      textAr: 'أستخدم نظام تدوين أو تذكير موثوقاً فلا تضيع مواعيدي ومهامي المهمة.',
+    },
+    {
+      id: 'ecf_3',
+      orderIndex: 3,
+      subscaleId: 'cognitive_flexibility',
+      textAr: 'عندما تتغير الظروف فجأة، أجد بديلاً عملياً دون أن أتجمد عند الخطة الأولى.',
+    },
+    {
+      id: 'ecf_4',
+      orderIndex: 4,
+      subscaleId: 'sustained_focus',
+      reverseScored: true,
+      textAr: 'يتشتت ذهني بسرعة بسبب الإشعارات أو الأفكار الجانبية أثناء الدراسة أو العمل.',
+    },
+    {
+      id: 'ecf_5',
+      orderIndex: 5,
+      subscaleId: 'memory_organization',
+      reverseScored: true,
+      textAr: 'أنسى تفاصيل حديث أو خطوة مطلوبة بعد وقت قصير إن لم أكتبها فوراً.',
+    },
+    {
+      id: 'ecf_6',
+      orderIndex: 6,
+      subscaleId: 'cognitive_flexibility',
+      textAr: 'أستمتع بالنظر إلى المشكلة من أكثر من زاوية قبل اختيار الحل الأفضل.',
+    },
+    {
+      id: 'ecf_7',
+      orderIndex: 7,
+      subscaleId: 'sustained_focus',
+      textAr: 'أرتب بيئة العمل أو الدراسة بتقليل المشتتات قبل البدء بالمهام الذهنية.',
+    },
+    {
+      id: 'ecf_8',
+      orderIndex: 8,
+      subscaleId: 'memory_organization',
+      textAr: 'أربط المعلومات الجديدة بأمثلة مألوفة عندي ليسهل تذكرها واستيعابها.',
+    },
+    {
+      id: 'ecf_9',
+      orderIndex: 9,
+      subscaleId: 'cognitive_flexibility',
+      reverseScored: true,
+      textAr: 'أتمسك بطريقة واحدة في التفكير أو الحل حتى عندما تثبت عدم ملاءمتها للموقف.',
+    },
+    {
+      id: 'ecf_10',
+      orderIndex: 10,
+      subscaleId: 'cognitive_flexibility',
+      textAr: 'ألاحظ الفروق المنطقية الدقيقة بين الفرضيات المختلفة قبل أن أتبنى رأياً.',
+    },
+  ],
+};

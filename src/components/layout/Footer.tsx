@@ -24,47 +24,42 @@ export function Footer({ onNavigate }: FooterProps) {
               </span>
             </div>
             <p className="text-sm leading-relaxed text-[#5F4562] max-w-md">
-              منصة استكشافية مستقلة لاكتشاف الاهتمامات المهنية والتخصصات الجامعية بوعي وهدوء، مع
-              مساحة مشتركة تقيس التقارب والتكامل الفكري بين شخصين بوضوح وشفافية.
+              منصة فردية هادئة وموثقة للاختبارات النفسية وفهم الشخصية والمشاعر والسلوك والنمو الذاتي
+              والميول المهنية، مع حفظ محلي آمن وإخراج <span dir="ltr">PDF</span> عربي متكامل.
             </p>
             <p className="text-xs leading-relaxed text-[#6F5472]">
-              مشروع ويب مستقل غير تابع لأي جامعة أو وزارة أو جهة رسمية.
+              منصة استكشافية وتثقيفية مستقلة لصاحب حساب واحد فقط — لا تقدم تشخيصاً طبياً.
             </p>
           </div>
 
           <div className="md:col-span-3 space-y-2.5">
             <h2 className="font-display text-sm font-bold text-[#351B38]">
-              مسارات المنصة
+              الأدوات والتقارير
             </h2>
             <ul className="space-y-2 text-sm text-[#5F4562]">
               <li>
-                <a href={toHref('/intro')} onClick={(e) => go(e, '/intro')} className="hover:text-[#762D50]">
-                  إعداد الأسماء والبدء
+                <a href={toHref('/library')} onClick={(e) => go(e, '/library')} className="hover:text-[#762D50]">
+                  مكتبة الاختبارات النفسية
                 </a>
               </li>
               <li>
-                <a href={toHref('/interests')} onClick={(e) => go(e, '/interests')} className="hover:text-[#762D50]">
-                  أنماط الاهتمامات الستة
+                <a href={toHref('/report')} onClick={(e) => go(e, '/report')} className="hover:text-[#762D50]">
+                  التقرير النفسي الشامل
+                </a>
+              </li>
+              <li>
+                <a href={toHref('/intro')} onClick={(e) => go(e, '/intro')} className="hover:text-[#762D50]">
+                  مقياس الميول المهنية (O*NET)
                 </a>
               </li>
               <li>
                 <a href={toHref('/majors')} onClick={(e) => go(e, '/majors')} className="hover:text-[#762D50]">
-                  دليل التخصصات
+                  دليل التخصصات الجامعية
                 </a>
               </li>
               <li>
                 <a href={toHref('/compare')} onClick={(e) => go(e, '/compare')} className="hover:text-[#762D50]">
                   مقارنة التخصصات
-                </a>
-              </li>
-              <li>
-                <a href={toHref('/compatibility')} onClick={(e) => go(e, '/compatibility')} className="hover:text-[#762D50]">
-                  تحليل التوافق
-                </a>
-              </li>
-              <li>
-                <a href={toHref('/our-world')} onClick={(e) => go(e, '/our-world')} className="hover:text-[#762D50]">
-                  عالمنا
                 </a>
               </li>
             </ul>
@@ -77,7 +72,7 @@ export function Footer({ onNavigate }: FooterProps) {
             <ul className="space-y-2 text-sm text-[#5F4562]">
               <li>
                 <a href={toHref('/about')} onClick={(e) => go(e, '/about')} className="hover:text-[#762D50]">
-                  عن اختبار زهرتي
+                  عن منصة زهرتي
                 </a>
               </li>
               <li>
@@ -87,7 +82,7 @@ export function Footer({ onNavigate }: FooterProps) {
               </li>
               <li>
                 <a href={toHref('/settings')} onClick={(e) => go(e, '/settings')} className="hover:text-[#762D50]">
-                  إعدادات الخصوصية والنسخ الاحتياطي
+                  إعدادات البيانات والنسخ الاحتياطي
                 </a>
               </li>
               <li>
@@ -101,19 +96,23 @@ export function Footer({ onNavigate }: FooterProps) {
                   onClick={(e) => go(e, '/terms')}
                   className="font-medium text-[#762D50] hover:underline"
                 >
-                  التعديلات وإخلاء المسؤولية (ترخيص <span dir="ltr">O*NET</span>)
+                  التراخيص وإخلاء المسؤولية العلمية
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-10 border-t border-[#E9D8D1] pt-6 text-xs leading-relaxed text-[#6F5472]">
+        <div className="mt-10 border-t border-[#E9D8D1] pt-6 text-xs leading-relaxed text-[#6F5472] space-y-1.5">
           <p>
-            يتضمن هذا الموقع معلومات مستندة إلى أدوات <span dir="ltr">O*NET Career Exploration Tools</span>{' '}
-            الصادرة عن <span dir="ltr">USDOL/ETA</span> بموجب رخصة مطوري أدوات O*NET. O*NET® علامة
-            تجارية مسجلة لـ <span dir="ltr">USDOL/ETA</span>. قام مشروع زهرتي (<span dir="ltr">ZAHRTI</span>)
-            بتكييف هذا المحتوى، ولم تعتمد الوزارة أو تصادق أو تختبر هذه التعديلات.
+            تُعرض جميع المقاييس العلمية المفتوحة (مثل{' '}
+            <span dir="ltr">IPIP-50, RSES, PHQ-9, GAD-7, DASS-21, WHO-5, BRS, SWLS, GSE, IRI</span>)
+            وفق رخصها الأصلية مع الإسناد الكامل، وتُفصل بصراحة عن الوحدات الاستكشافية غير المقننة.
+          </p>
+          <p>
+            يتضمن قسم الميول المهنية محتوى مستنداً إلى أدوات <span dir="ltr">O*NET Career Exploration Tools</span>{' '}
+            الصادرة عن <span dir="ltr">USDOL/ETA</span> بموجب رخصة مطوري أدوات O*NET دون مصادقة
+            رسمية من الوزارة على الترجمة العربية.
           </p>
         </div>
       </div>

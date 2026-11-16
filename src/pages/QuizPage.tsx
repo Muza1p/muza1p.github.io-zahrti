@@ -38,15 +38,21 @@ export function QuizPage({
 }: QuizPageProps) {
   const question = MINI_IP_QUESTIONS[currentQuestionIndex] ?? MINI_IP_QUESTIONS[0];
   const selectedValue = answers[question.originalIndex];
-  const progressPct = Math.round((answeredCount / MINI_IP_QUESTIONS.length) * 100);
+  const progressPct = Math.max(4, Math.round((answeredCount / MINI_IP_QUESTIONS.length) * 100));
+  const clickLockRef = React.useRef(false);
 
   const handleChoose = (val: LikertValue) => {
+    if (clickLockRef.current) return;
+    clickLockRef.current = true;
     onSelectAnswer(question.originalIndex, val);
     window.setTimeout(() => {
       if (currentQuestionIndex < MINI_IP_QUESTIONS.length - 1) {
         onChangeQuestionIndex(currentQuestionIndex + 1);
       }
-    }, 180);
+      window.setTimeout(() => {
+        clickLockRef.current = false;
+      }, 120);
+    }, 240);
   };
 
   useEffect(() => {
@@ -69,50 +75,47 @@ export function QuizPage({
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 space-y-6">
-      {/* Top Focus Header: Active Person + Clean Progress */}
+      {/* Top Focus Header: Single-User + Zero Question Numbers */}
       <div className="space-y-3 border-b border-[#E9D8D1] pb-5">
         <div className="flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
           <div className="flex items-center gap-2 text-[#5F4562]">
-            <span>الاختبار الشخصي لـ</span>
+            <span>مقياس الميول المهنية —</span>
             <strong className="text-[#351B38] font-bold">{activePersonName}</strong>
-            <button
-              type="button"
-              onClick={onSwitchProfile}
-              className="text-xs font-medium text-[#762D50] hover:underline cursor-pointer"
-            >
-              (تغيير الشخص)
-            </button>
           </div>
-          <div className="font-semibold text-[#351B38] tabular-nums">
-            السؤال {question.originalIndex} من {MINI_IP_QUESTIONS.length} · المُنجز {answeredCount}/30
-          </div>
+          <button
+            type="button"
+            onClick={onSwitchProfile}
+            className="text-xs font-medium text-[#762D50] hover:underline cursor-pointer"
+          >
+            العودة للإرشادات
+          </button>
         </div>
 
-        {/* Hairline Editorial Progress Bar */}
+        {/* Hairline Qualitative Progress Bar (no numerical counts) */}
         <div
           role="progressbar"
           aria-valuenow={progressPct}
           aria-valuemin={0}
           aria-valuemax={100}
-          aria-label="نسبة التقدم في الاختبار"
+          aria-label="مستوى التقدم العام في المقياس"
           className="h-2 w-full overflow-hidden rounded-full bg-[#E9D8D1]"
         >
           <div
             className="h-full rounded-full bg-[#762D50] transition-all duration-300"
-            style={{ width: `${Math.max(3, progressPct)}%` }}
+            style={{ width: `${progressPct}%` }}
           />
         </div>
 
-        {milestoneNote && (
-          <p className="text-xs text-[#762D50] font-medium pt-0.5">{milestoneNote}</p>
-        )}
+        <p className="text-xs text-[#6F5472]">
+          {milestoneNote || 'رحلتكِ مستمرة بهدوء — يتم حفظ اختياراتكِ تلقائياً.'}
+        </p>
       </div>
 
       {/* Main Question Focus Surface */}
       <article className="rounded-3xl border border-[#E9D8D1] bg-[#FFFDF9] p-6 sm:p-10 space-y-8">
         <header className="space-y-3 text-center">
           <p className="text-xs font-semibold tracking-wider text-[#9F7E44]">
-            فقرة {String(question.originalIndex).padStart(2, '0')} · عبّري عن شعوركِ تجاه هذا النشاط
+            عبّري عن شعوركِ تجاه هذا النشاط
           </p>
           <h1 className="font-display text-2xl sm:text-3xl font-bold leading-snug text-[#351B38]">
             {question.arabicText}
@@ -136,25 +139,14 @@ export function QuizPage({
                     : 'border-[#E9D8D1] bg-[#F9F3EC]/55 text-[#351B38] hover:border-[#C47C91] hover:bg-[#F9F3EC]'
                 }`}
               >
-                <div className="flex items-center gap-3.5">
-                  <span
-                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border text-xs font-bold tabular-nums ${
-                      isSelected
-                        ? 'border-[#C6A56B] bg-[#C6A56B] text-[#351B38]'
-                        : 'border-[#E9D8D1] bg-[#FFFDF9] text-[#5F4562]'
+                <div className="space-y-0.5">
+                  <div className="text-sm sm:text-base font-bold">{opt.labelAr}</div>
+                  <div
+                    className={`text-xs ${
+                      isSelected ? 'text-[#E9D8D1]' : 'text-[#5F4562]'
                     }`}
                   >
-                    {opt.value}
-                  </span>
-                  <div className="space-y-0.5">
-                    <div className="text-sm sm:text-base font-bold">{opt.labelAr}</div>
-                    <div
-                      className={`text-xs ${
-                        isSelected ? 'text-[#E9D8D1]' : 'text-[#5F4562]'
-                      }`}
-                    >
-                      {opt.descriptionAr}
-                    </div>
+                    {opt.descriptionAr}
                   </div>
                 </div>
                 {isSelected && <Check className="h-4 w-4 shrink-0 text-[#C6A56B]" aria-hidden="true" />}
@@ -201,10 +193,10 @@ export function QuizPage({
         </div>
       </article>
 
-      {/* Compact Question Jump Index */}
+      {/* Unnumbered Visual Progress Trail + Restart Action */}
       <section className="rounded-2xl border border-[#E9D8D1] bg-[#FFFDF9] p-5 space-y-3">
         <div className="flex items-center justify-between text-xs text-[#5F4562]">
-          <span>الانتقال السريع بين الفقرات</span>
+          <span>العودة لمحطات الإجابة السابقة</span>
           <button
             type="button"
             onClick={onReset}
@@ -215,7 +207,7 @@ export function QuizPage({
           </button>
         </div>
 
-        <div className="grid grid-cols-10 gap-1.5 sm:grid-cols-15">
+        <div className="flex flex-wrap items-center justify-center gap-2">
           {MINI_IP_QUESTIONS.map((q, idx) => {
             const answered = Boolean(answers[q.originalIndex]);
             const current = idx === currentQuestionIndex;
@@ -224,17 +216,15 @@ export function QuizPage({
                 key={q.id}
                 type="button"
                 onClick={() => onChangeQuestionIndex(idx)}
-                aria-label={`الانتقال إلى الفقرة ${q.originalIndex}`}
-                className={`h-8 rounded-lg text-xs font-semibold tabular-nums transition-colors cursor-pointer ${
+                aria-label="الانتقال إلى هذه العبارة"
+                className={`h-3 w-3 rounded-full transition-colors cursor-pointer ${
                   current
-                    ? 'bg-[#351B38] text-[#F9F3EC]'
+                    ? 'bg-[#351B38] scale-125'
                     : answered
-                    ? 'bg-[#762D50]/15 text-[#762D50] border border-[#762D50]/30'
-                    : 'bg-[#F9F3EC] text-[#6F5472] border border-[#E9D8D1]'
+                    ? 'bg-[#762D50]/55'
+                    : 'bg-[#E9D8D1]'
                 }`}
-              >
-                {q.originalIndex}
-              </button>
+              />
             );
           })}
         </div>

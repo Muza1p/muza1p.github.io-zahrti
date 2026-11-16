@@ -1,0 +1,210 @@
+import { PsychQuestion } from '@/src/types/psychology';
+
+export const GROWTH_EMPATHY_ITEMS_BY_ID: Record<string, PsychQuestion[]> = {
+  // Brief Resilience Scale (BRS-6, Smith et al. 2008) — 1..5, reverse items 2, 4, 6
+  'brs-6': [
+    {
+      id: 'brs_1',
+      orderIndex: 1,
+      subscaleId: 'brs_total',
+      reverseScored: false,
+      textAr: 'أميل إلى التعافي واستعادة توازني بسرعة بعد الأوقات الصعبة.',
+      textEn: 'I tend to bounce back quickly after hard times.',
+    },
+    {
+      id: 'brs_2',
+      orderIndex: 2,
+      subscaleId: 'brs_total',
+      reverseScored: true,
+      textAr: 'أجد صعوبة في تجاوز الأحداث المرهقة أو العصيبة.',
+      textEn: 'I have a hard time making it through stressful events.',
+    },
+    {
+      id: 'brs_3',
+      orderIndex: 3,
+      subscaleId: 'brs_total',
+      reverseScored: false,
+      textAr: 'لا يستغرق الأمر مني وقتاً طويلاً للتعافي من المواقف الضاغطة.',
+      textEn: 'It does not take me long to recover from a stressful event.',
+    },
+    {
+      id: 'brs_4',
+      orderIndex: 4,
+      subscaleId: 'brs_total',
+      reverseScored: true,
+      textAr: 'من الصعب عليّ استعادة عافيتي النفسية عندما يحدث أمر سيء.',
+      textEn: 'It is hard for me to snap back when something bad happens.',
+    },
+    {
+      id: 'brs_5',
+      orderIndex: 5,
+      subscaleId: 'brs_total',
+      reverseScored: false,
+      textAr: 'أتجاوز الأوقات الصعبة عادةً بأقل قدر من الانهيار أو المعاناة.',
+      textEn: 'I usually come through difficult times with little trouble.',
+    },
+    {
+      id: 'brs_6',
+      orderIndex: 6,
+      subscaleId: 'brs_total',
+      reverseScored: true,
+      textAr: 'أميل لأخذ وقت طويل حتى أتغلب على الانتكاسات في حياتي.',
+      textEn: 'I tend to take a long time to get over set-backs in my life.',
+    },
+  ],
+
+  // Satisfaction With Life Scale (SWLS-5, Diener et al. 1985) — 1..7, no reverse
+  'swls-5': [
+    {
+      id: 'swls_1',
+      orderIndex: 1,
+      subscaleId: 'swls_total',
+      reverseScored: false,
+      textAr: 'في معظم الجوانب، تقترب حياتي من الصورة التي أتمناها.',
+      textEn: 'In most ways my life is close to my ideal.',
+    },
+    {
+      id: 'swls_2',
+      orderIndex: 2,
+      subscaleId: 'swls_total',
+      reverseScored: false,
+      textAr: 'ظروف حياتي ممتازة ومُرضية للغاية.',
+      textEn: 'The conditions of my life are excellent.',
+    },
+    {
+      id: 'swls_3',
+      orderIndex: 3,
+      subscaleId: 'swls_total',
+      reverseScored: false,
+      textAr: 'أنا راضية عن حياتي بصورة عامة.',
+      textEn: 'I am satisfied with my life.',
+    },
+    {
+      id: 'swls_4',
+      orderIndex: 4,
+      subscaleId: 'swls_total',
+      reverseScored: false,
+      textAr: 'حتى الآن، حصلتُ على الأشياء المهمة التي أردتها في حياتي.',
+      textEn: 'So far I have gotten the important things I want in life.',
+    },
+    {
+      id: 'swls_5',
+      orderIndex: 5,
+      subscaleId: 'swls_total',
+      reverseScored: false,
+      textAr: 'لو عشتُ حياتي من جديد، لما غيّرتُ فيها شيئاً تقريباً.',
+      textEn: 'If I could live my life over, I would change almost nothing.',
+    },
+  ],
+
+  // General Self-Efficacy Scale (GSE-10, Schwarzer & Jerusalem 1995) — 1..4, no reverse
+  'gse-10': [
+    {
+      id: 'gse_1',
+      orderIndex: 1,
+      subscaleId: 'gse_total',
+      textAr: 'يمكنني دائماً النجاح في حل المشكلات الصعبة إذا بذلتُ جهداً كافياً.',
+      textEn: 'I can always manage to solve difficult problems if I try hard enough.',
+    },
+    {
+      id: 'gse_2',
+      orderIndex: 2,
+      subscaleId: 'gse_total',
+      textAr: 'إذا عارضني أحدهم، أستطيع إيجاد السبل والوسائل لتحقيق ما أريد.',
+      textEn: 'If someone opposes me, I can find the means and ways to get what I want.',
+    },
+    {
+      id: 'gse_3',
+      orderIndex: 3,
+      subscaleId: 'gse_total',
+      textAr: 'من السهل عليّ التمسك بأهدافي وتحقيقها.',
+      textEn: 'It is easy for me to stick to my aims and accomplish my goals.',
+    },
+    {
+      id: 'gse_4',
+      orderIndex: 4,
+      subscaleId: 'gse_total',
+      textAr: 'أنا واثقة من قدرتي على التعامل بكفاءة مع الأحداث غير المتوقعة.',
+      textEn: 'I am confident that I could deal efficiently with unexpected events.',
+    },
+    {
+      id: 'gse_5',
+      orderIndex: 5,
+      subscaleId: 'gse_total',
+      textAr: 'بفضل حسن تصرفي، أعرف كيف أتعامل مع المواقف المفاجئة.',
+      textEn: 'Thanks to my resourcefulness, I know how to handle unforeseen situations.',
+    },
+    {
+      id: 'gse_6',
+      orderIndex: 6,
+      subscaleId: 'gse_total',
+      textAr: 'أستطيع حل معظم المشكلات إذا استثمرتُ المجهود اللازم لها.',
+      textEn: 'I can solve most problems if I invest the necessary effort.',
+    },
+    {
+      id: 'gse_7',
+      orderIndex: 7,
+      subscaleId: 'gse_total',
+      textAr: 'أستطيع الحفاظ على هدوئي عند مواجهة الصعوبات لأنني أعتمد على مهاراتي في التكيف.',
+      textEn: 'I can remain calm when facing difficulties because I can rely on my coping abilities.',
+    },
+    {
+      id: 'gse_8',
+      orderIndex: 8,
+      subscaleId: 'gse_total',
+      textAr: 'عندما أواجه مشكلة، أستطيع غالباً إيجاد عدة حلول ممكنة لها.',
+      textEn: 'When I am confronted with a problem, I can usually find several solutions.',
+    },
+    {
+      id: 'gse_9',
+      orderIndex: 9,
+      subscaleId: 'gse_total',
+      textAr: 'إذا وقعتُ في مأزق، أستطيع عادةً التفكير في مخرج مناسب.',
+      textEn: 'If I am in trouble, I can usually think of a solution.',
+    },
+    {
+      id: 'gse_10',
+      orderIndex: 10,
+      subscaleId: 'gse_total',
+      textAr: 'بوسعي عادةً تدبّر أمري والتعامل مع أي ظرف يواجهني.',
+      textEn: 'I can usually handle whatever comes my way.',
+    },
+  ],
+
+  // Interpersonal Reactivity Index (IRI-28, Davis 1980/1983) — Scale 0..4
+  // Reverse-scored items: 3, 4, 7, 12, 13, 14, 15, 18, 19
+  // PT (Perspective-Taking): 3R, 8, 11, 15R, 21, 25, 28
+  // FS (Fantasy): 1, 5, 7R, 12R, 16, 23, 26
+  // EC (Empathic Concern): 2, 4R, 9, 14R, 18R, 20, 22
+  // PD (Personal Distress): 6, 10, 13R, 17, 19R, 24, 27
+  'iri-28': [
+    { id: 'iri_1', orderIndex: 1, subscaleId: 'fantasy', reverseScored: false, textAr: 'أتخيل أحياناً ما قد يحدث لي لو كنتُ مكان أبطال الروايات أو القصص التي أقرؤها.', textEn: 'I daydream and fantasize, with some regularity, about things that might happen to me.' },
+    { id: 'iri_2', orderIndex: 2, subscaleId: 'empathic_concern', reverseScored: false, textAr: 'غالباً ما تراودني مشاعر رقيقة وحنونة تجاه الأشخاص الأقل حظاً مني.', textEn: 'I often have tender, concerned feelings for people less fortunate than me.' },
+    { id: 'iri_3', orderIndex: 3, subscaleId: 'perspective_taking', reverseScored: true, textAr: 'أجد صعوبة أحياناً في رؤية الأمور من وجهة نظر الطرف الآخر.', textEn: "I sometimes find it difficult to see things from the 'other guy's' point of view." },
+    { id: 'iri_4', orderIndex: 4, subscaleId: 'empathic_concern', reverseScored: true, textAr: 'أحياناً لا أشعر بالأسف الشديد تجاه الآخرين عندما يمرون بمشكلات.', textEn: "Sometimes I don't feel very sorry for other people when they are having problems." },
+    { id: 'iri_5', orderIndex: 5, subscaleId: 'fantasy', reverseScored: false, textAr: 'أندمج تماماً في مشاعر شخصيات الرواية أو القصة التي أتابعها.', textEn: 'I really get involved with the feelings of the characters in a novel.' },
+    { id: 'iri_6', orderIndex: 6, subscaleId: 'personal_distress', reverseScored: false, textAr: 'في المواقف الطارئة، أشعر بالتوجس وعدم الارتياح والارتباك.', textEn: 'In emergency situations, I feel apprehensive and ill-at-ease.' },
+    { id: 'iri_7', orderIndex: 7, subscaleId: 'fantasy', reverseScored: true, textAr: 'أكون موضوعية ومحايدة غالباً عند مشاهدة فيلم أو مسرحية ولا أنغمس فيها تماماً.', textEn: 'I am usually objective when I watch a movie or play, and I don’t often get completely caught up in it.' },
+    { id: 'iri_8', orderIndex: 8, subscaleId: 'perspective_taking', reverseScored: false, textAr: 'أحاول الاستماع لوجهة نظر كل طرف في أي خلاف قبل أن أتخذ قراراً.', textEn: 'I try to look at everybody’s side of a disagreement before I make a decision.' },
+    { id: 'iri_9', orderIndex: 9, subscaleId: 'empathic_concern', reverseScored: false, textAr: 'عندما أرى شخصاً يُستغل، أشعر برغبة داخلية في حمايته والوقوف بجانبه.', textEn: 'When I see someone being taken advantage of, I feel kind of protective towards them.' },
+    { id: 'iri_10', orderIndex: 10, subscaleId: 'personal_distress', reverseScored: false, textAr: 'أشعر أحياناً بالعجز عندما أكون في وسط موقف عاطفي شديد التوتر.', textEn: 'I sometimes feel helpless when I am in the middle of a very emotional situation.' },
+    { id: 'iri_11', orderIndex: 11, subscaleId: 'perspective_taking', reverseScored: false, textAr: 'أحاول أحياناً فهم صديقاتي بشكل أعمق عبر تخيّل كيف تبدو الأمور من زاويتهن.', textEn: 'I sometimes try to understand my friends better by imagining how things look from their perspective.' },
+    { id: 'iri_12', orderIndex: 12, subscaleId: 'fantasy', reverseScored: true, textAr: 'من النادر أن أستغرق كلياً في كتاب مشوق أو عمل فني.', textEn: 'Becoming extremely involved in a good book or movie is somewhat rare for me.' },
+    { id: 'iri_13', orderIndex: 13, subscaleId: 'personal_distress', reverseScored: true, textAr: 'عندما أرى أحداً يتعرض للأذى، أميل إلى الحفاظ على هدوئي وتماسكي.', textEn: 'When I see someone get hurt, I tend to remain calm.' },
+    { id: 'iri_14', orderIndex: 14, subscaleId: 'empathic_concern', reverseScored: true, textAr: 'مصائب الآخرين ومتاعبهم لا تزعجني كثيراً في العادة.', textEn: "Other people's misfortunes do not usually disturb me a great deal." },
+    { id: 'iri_15', orderIndex: 15, subscaleId: 'perspective_taking', reverseScored: true, textAr: 'إذا كنتُ متأكدةً من صواب رأيي، لا أضيّع وقتاً طويلاً في الاستماع لحجج الآخرين.', textEn: "If I'm sure I'm right about something, I don't waste much time listening to other people's arguments." },
+    { id: 'iri_16', orderIndex: 16, subscaleId: 'fantasy', reverseScored: false, textAr: 'بعد مشاهدة مسرحية أو قصة مؤثرة، أشعر وكأنني عشتُ جزءاً من إحدى شخصياتها.', textEn: 'After seeing a play or movie, I have felt as though I were one of the characters.' },
+    { id: 'iri_17', orderIndex: 17, subscaleId: 'personal_distress', reverseScored: false, textAr: 'الوجود في أجواء عاطفية متوترة يربكني ويُشعرني بالخوف أو التوتر.', textEn: 'Being in a tense emotional situation scares me.' },
+    { id: 'iri_18', orderIndex: 18, subscaleId: 'empathic_concern', reverseScored: true, textAr: 'عندما أرى شخصاً يُعامل بظلم، لا أشعر دائماً بقدر كبير من الشفقة تجاهه.', textEn: "When I see someone being treated unfairly, I sometimes don't feel very much pity for them." },
+    { id: 'iri_19', orderIndex: 19, subscaleId: 'personal_distress', reverseScored: true, textAr: 'عادةً ما أتصرف بكفاءة وثبات عند التعامل مع المواقف الطارئة.', textEn: 'I am usually pretty effective in dealing with emergencies.' },
+    { id: 'iri_20', orderIndex: 20, subscaleId: 'empathic_concern', reverseScored: false, textAr: 'كثيراً ما أتأثر بعمق بالأحداث والأمور التي أراها تحدث أمامي.', textEn: 'I am often quite touched by things that I see happen.' },
+    { id: 'iri_21', orderIndex: 21, subscaleId: 'perspective_taking', reverseScored: false, textAr: 'أؤمن بأن لكل مسألة وجهتين، وأحاول النظر إلى الجانبين معاً.', textEn: 'I believe that there are two sides to every question and try to look at them both.' },
+    { id: 'iri_22', orderIndex: 22, subscaleId: 'empathic_concern', reverseScored: false, textAr: 'أصف نفسي بأنني إنسانة ليّنة القلب ورقيقة المشاعر.', textEn: 'I would describe myself as a pretty soft-hearted person.' },
+    { id: 'iri_23', orderIndex: 23, subscaleId: 'fantasy', reverseScored: false, textAr: 'عندما أتابع فيلماً جيداً، يسهل عليّ وضع نفسي مكان البطل أو الشخصية الرئيسة.', textEn: 'When I watch a good movie, I can very easily put myself in the place of a leading character.' },
+    { id: 'iri_24', orderIndex: 24, subscaleId: 'personal_distress', reverseScored: false, textAr: 'أميل إلى فقدان السيطرة والارتباك في حالات الطوارئ.', textEn: 'I tend to lose control during emergencies.' },
+    { id: 'iri_25', orderIndex: 25, subscaleId: 'perspective_taking', reverseScored: false, textAr: 'عندما أغضب من شخص ما، أحاول عادةً وضع نفسي مكانه لبعض الوقت.', textEn: "When I'm upset at someone, I usually try to 'put myself in his shoes' for a while." },
+    { id: 'iri_26', orderIndex: 26, subscaleId: 'fantasy', reverseScored: false, textAr: 'عندما أقرأ قصة شيقة، أتخيل كيف سيكون شعوري لو حدثت وقائعها لي.', textEn: 'When I am reading an interesting story or novel, I imagine how I would feel if the events in the story were happening to me.' },
+    { id: 'iri_27', orderIndex: 27, subscaleId: 'personal_distress', reverseScored: false, textAr: 'عندما أرى شخصاً بحاجة ماسة للمساعدة في أزمة، أرتبك جداً وقد أنهار.', textEn: 'When I see someone who badly needs help in an emergency, I go to pieces.' },
+    { id: 'iri_28', orderIndex: 28, subscaleId: 'perspective_taking', reverseScored: false, textAr: 'قبل أن أنتقد أحداً، أحاول تخيّل كيف سيكون شعوري لو كنتُ في مكانه.', textEn: 'Before criticizing somebody, I try to imagine how I would feel if I were in their place.' },
+  ],
+};

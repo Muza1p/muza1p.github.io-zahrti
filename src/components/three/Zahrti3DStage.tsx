@@ -19,12 +19,19 @@ function checkWebGLSupport(): boolean {
   if (typeof window === 'undefined' || typeof document === 'undefined') return false;
   try {
     const canvas = document.createElement('canvas');
-    return Boolean(
-      window.WebGLRenderingContext &&
-        (canvas.getContext('webgl2') ||
-          canvas.getContext('webgl') ||
-          canvas.getContext('experimental-webgl'))
-    );
+    const gl =
+      (canvas.getContext('webgl2') as WebGL2RenderingContext | null) ||
+      (canvas.getContext('webgl') as WebGLRenderingContext | null) ||
+      (canvas.getContext('experimental-webgl') as WebGLRenderingContext | null);
+    if (!gl) return false;
+    const ext = gl.getExtension('WEBGL_debug_renderer_info');
+    if (ext) {
+      const renderer = String(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) || '');
+      if (/SwiftShader|llvmpipe|softpipe|Software|Basic Render/i.test(renderer)) {
+        return false;
+      }
+    }
+    return true;
   } catch {
     return false;
   }
