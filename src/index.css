@@ -4,31 +4,30 @@
   --font-display: "Alexandria", "Tajawal", system-ui, sans-serif;
   --font-sans: "Tajawal", "Alexandria", system-ui, sans-serif;
 
-  /* 3D Kawaii Universe & Coquette Editorial Palette (No Orange, No Neon) */
-  --color-cream-ivory: #FDF9F6;
-  --color-warm-white: #FFFDFB;
-  --color-baby-pink: #FCEBF0;
-  --color-soft-blush: #F7E7EB;
-  --color-blush-tint: #FBF1F3;
-  --color-rose-mauve: #C48397;
-  --color-berry-pink: #A9506C;
-  --color-berry-hover: #913F59;
-  --color-dusty-rose: #A9506C;
-  --color-dusty-rose-hover: #913F59;
-  --color-rose-border: #E8CED5;
-  --color-muted-lavender: #8E74A8;
-  --color-soft-purple: #9C83B8;
-  --color-lavender-tint: #F4EFF8;
-  --color-soft-mauve: #C99AA8;
-  --color-dark-plum: #381F2E;
-  --color-muted-plum: #69495B;
-  --color-soft-gold: #D4AF6A;
+  /* ZAHRTI Premium Interactive Palette (Zero Orange, Zero Neon) */
+  --color-ivory: #FFF8F3;
+  --color-cream-ivory: #FFF8F3;
+  --color-warm-white: #FFFCFA;
+  --color-rose: #F2A6C1;
+  --color-lilac: #B49AE8;
+  --color-berry-pink: #C04472;
+  --color-berry-hover: #A6345F;
+  --color-royal-violet: #7651B8;
+  --color-royal-violet-hover: #613F9E;
+  --color-deep-plum: #351B38;
+  --color-muted-plum: #5F4163;
+  --color-soft-gold: #D5B36A;
+  --color-rose-border: #EAD3E0;
+  --color-lavender-tint: #F4EFFB;
+  --color-blush-tint: #FDF0F5;
 }
 
 @layer base {
   html {
     font-family: var(--font-sans);
     scroll-behavior: smooth;
+    background-color: #FFF8F3;
+    color: #351B38;
   }
 
   h1, h2, h3, h4, .font-display {
@@ -44,48 +43,41 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Harmonized per-section pastel themes (no monochrome fatigue, zero neon/orange) */
-.zahrti-paper-bg {
-  background-color: #FDF9F6;
-  background-image:
-    radial-gradient(at 10% 10%, rgba(252, 235, 240, 0.55) 0px, transparent 52%),
-    radial-gradient(at 90% 18%, rgba(226, 212, 238, 0.34) 0px, transparent 48%),
-    radial-gradient(at 50% 92%, rgba(247, 231, 235, 0.4) 0px, transparent 55%);
-}
-
+/* Harmonized per-route atmospheric gradients — Ivory base with soft Rose, Lilac & Gold highlights */
+.zahrti-paper-bg,
 .zahrti-theme-home {
-  background-color: #FDF9F6;
+  background-color: #FFF8F3;
   background-image:
-    radial-gradient(at 14% 8%, rgba(252, 235, 240, 0.72) 0px, transparent 54%),
-    radial-gradient(at 88% 16%, rgba(235, 224, 244, 0.45) 0px, transparent 48%),
-    radial-gradient(at 50% 88%, rgba(247, 231, 235, 0.45) 0px, transparent 55%);
+    radial-gradient(at 14% 6%, rgba(242, 166, 193, 0.28) 0px, transparent 52%),
+    radial-gradient(at 88% 12%, rgba(180, 154, 232, 0.24) 0px, transparent 48%),
+    radial-gradient(at 50% 90%, rgba(213, 179, 106, 0.12) 0px, transparent 55%);
 }
 
 .zahrti-theme-quiz {
-  background-color: #FAF7FC;
+  background-color: #FBF7FE;
   background-image:
-    radial-gradient(at 15% 12%, rgba(232, 221, 244, 0.6) 0px, transparent 52%),
-    radial-gradient(at 85% 22%, rgba(250, 232, 238, 0.45) 0px, transparent 48%),
-    radial-gradient(at 50% 90%, rgba(244, 239, 248, 0.65) 0px, transparent 55%);
+    radial-gradient(at 15% 10%, rgba(180, 154, 232, 0.28) 0px, transparent 54%),
+    radial-gradient(at 86% 20%, rgba(242, 166, 193, 0.22) 0px, transparent 50%),
+    radial-gradient(at 50% 90%, rgba(255, 248, 243, 0.85) 0px, transparent 55%);
 }
 
 .zahrti-theme-results {
-  background-color: #FDF8FA;
+  background-color: #FFF8F3;
   background-image:
-    radial-gradient(at 12% 10%, rgba(247, 231, 235, 0.65) 0px, transparent 52%),
-    radial-gradient(at 86% 18%, rgba(236, 224, 245, 0.48) 0px, transparent 48%),
-    radial-gradient(at 50% 85%, rgba(252, 235, 240, 0.55) 0px, transparent 55%);
+    radial-gradient(at 12% 8%, rgba(192, 68, 114, 0.14) 0px, transparent 52%),
+    radial-gradient(at 86% 14%, rgba(118, 81, 184, 0.16) 0px, transparent 50%),
+    radial-gradient(at 50% 88%, rgba(213, 179, 106, 0.14) 0px, transparent 55%);
 }
 
 .zahrti-theme-majors {
-  background-color: #FCF9F8;
+  background-color: #FFF9F5;
   background-image:
-    radial-gradient(at 10% 14%, rgba(244, 239, 248, 0.55) 0px, transparent 50%),
-    radial-gradient(at 92% 14%, rgba(252, 235, 240, 0.55) 0px, transparent 50%),
-    radial-gradient(at 50% 92%, rgba(246, 236, 241, 0.45) 0px, transparent 55%);
+    radial-gradient(at 10% 12%, rgba(180, 154, 232, 0.22) 0px, transparent 50%),
+    radial-gradient(at 90% 14%, rgba(242, 166, 193, 0.24) 0px, transparent 50%),
+    radial-gradient(at 50% 92%, rgba(213, 179, 106, 0.1) 0px, transparent 55%);
 }
 
-/* Lightweight GPU-compositor animations (transform & opacity only) */
+/* Lightweight GPU-compositor animations (transform & opacity only, zero pulse/neon) */
 @keyframes kawaiiFloat {
   0%, 100% {
     transform: translateY(0px);
@@ -168,7 +160,7 @@
   }
   body {
     background: #ffffff !important;
-    color: #1f141a !important;
+    color: #351B38 !important;
   }
   .print-break-inside-avoid {
     break-inside: avoid;

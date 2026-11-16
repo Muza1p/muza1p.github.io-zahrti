@@ -16,9 +16,9 @@ export const RIASEC_PROFILES: Record<RiasecCode, RiasecProfileInfo> = {
     nameAr: 'النمط العملي / الواقعي',
     nameEn: 'Realistic',
     subtitleAr: 'العمل اليدوي، التطبيق الميداني، والأدوات الواقعية',
-    colorHex: '#C77A8D',
-    tintHex: '#F9EBEE',
-    borderHex: '#E8C5CE',
+    colorHex: '#C04472',
+    tintHex: '#FDF0F5',
+    borderHex: '#F2C6D8',
     descriptionAr:
       'يميل أصحاب هذا الاهتمام إلى الأنشطة العملية المباشرة التي تتضمن التعامل مع الأدوات والأجهزة والمواد الملموسة أو العمل الميداني، ويفضلون رؤية نتائج واقعية ملموسة لعملهم.',
     activitiesAr: [
@@ -44,9 +44,9 @@ export const RIASEC_PROFILES: Record<RiasecCode, RiasecProfileInfo> = {
     nameAr: 'النمط البحثي / الاستقصائي',
     nameEn: 'Investigative',
     subtitleAr: 'البحث العلمي، التحليل، وحل المشكلات المعقدة',
-    colorHex: '#9C83B8',
-    tintHex: '#F3EEF9',
-    borderHex: '#D8CBE7',
+    colorHex: '#7651B8',
+    tintHex: '#F4EFFB',
+    borderHex: '#D8C9F2',
     descriptionAr:
       'يميل أصحاب هذا الاهتمام إلى الاستكشاف العلمي، طرح الأسئلة العميقة، تحليل البيانات والتجارب، وفهم كيف تعمل الظواهر الطبيعية أو التقنية أو الحيوية.',
     activitiesAr: [
@@ -72,9 +72,9 @@ export const RIASEC_PROFILES: Record<RiasecCode, RiasecProfileInfo> = {
     nameAr: 'النمط الفني / الإبداعي',
     nameEn: 'Artistic',
     subtitleAr: 'التعبير الإبداعي، التصميم، والابتكار البصري واللغوي',
-    colorHex: '#889C89',
-    tintHex: '#EFF4EF',
-    borderHex: '#C9D8C9',
+    colorHex: '#6E947E',
+    tintHex: '#EEF5F0',
+    borderHex: '#C5DBC9',
     descriptionAr:
       'يميل أصحاب هذا الاهتمام إلى الأنشطة التي تمنح مساحة للتخيل والتعبير الأصيل عبر التصميم، الكتابة، الفنون البصرية، أو الإعلام بعيداً عن القوالب الروتينية الصارمة.',
     activitiesAr: [
@@ -100,9 +100,9 @@ export const RIASEC_PROFILES: Record<RiasecCode, RiasecProfileInfo> = {
     nameAr: 'النمط الاجتماعي / المساعد',
     nameEn: 'Social',
     subtitleAr: 'التعليم، الإرشاد، مساعدة الناس، والتواصل الإنساني',
-    colorHex: '#7D95B5',
-    tintHex: '#EDF2F8',
-    borderHex: '#C5D3E6',
+    colorHex: '#5D73B2',
+    tintHex: '#EEF1FA',
+    borderHex: '#C5CFE8',
     descriptionAr:
       'يميل أصحاب هذا الاهتمام إلى العمل المباشر مع الناس لتعليمهم، دعمهم، رعايتهم صحياً أو نفسياً، أو المساهمة في مبادرات مجتمعية وتطوعية.',
     activitiesAr: [
@@ -128,9 +128,9 @@ export const RIASEC_PROFILES: Record<RiasecCode, RiasecProfileInfo> = {
     nameAr: 'النمط الريادي / القيادي',
     nameEn: 'Enterprising',
     subtitleAr: 'القيادة، المبادرة، الإقناع، وإدارة المشاريع',
-    colorHex: '#D18B7A',
-    tintHex: '#FAF0ED',
-    borderHex: '#E8CBC4',
+    colorHex: '#A66EC9',
+    tintHex: '#F7EFFB',
+    borderHex: '#E0C7F0',
     descriptionAr:
       'يميل أصحاب هذا الاهتمام إلى قيادة الفرق، إطلاق المبادرات والمشاريع، التفاوض والإقناع، واتخاذ القرارات التنظيمية والتجارية في بيئات ديناميكية.',
     activitiesAr: [
@@ -156,9 +156,9 @@ export const RIASEC_PROFILES: Record<RiasecCode, RiasecProfileInfo> = {
     nameAr: 'النمط التنظيمي / التقليدي',
     nameEn: 'Conventional',
     subtitleAr: 'الدقة، تنظيم البيانات، السجلات، والأنظمة الواضحة',
-    colorHex: '#CFA56E',
-    tintHex: '#FAF4EA',
-    borderHex: '#E6D3B8',
+    colorHex: '#C59F4E',
+    tintHex: '#FCF7EC',
+    borderHex: '#EAD8AF',
     descriptionAr:
       'يميل أصحاب هذا الاهتمام إلى العمل المنظم والدقيق مع البيانات والأرقام والوثائق والأنظمة الواضحة، ويفضلون وضوح الإجراءات والخطوات المتسلسلة.',
     activitiesAr: [

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
+import { motion } from 'motion/react';
 import { AlertTriangle, ArrowLeft, RefreshCw } from 'lucide-react';
-import { CharacterStage } from '@/src/components/characters/CharacterStage';
+import { Zahrti3DStage } from '@/src/components/three/Zahrti3DStage';
 import { AssessmentResult } from '@/src/types';
 
 interface AnalyzingPageProps {
@@ -33,7 +34,7 @@ export function AnalyzingPage({
       if (res) {
         onNavigate('/results');
       }
-    }, 550);
+    }, 950);
 
     return () => window.clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -43,14 +44,14 @@ export function AnalyzingPage({
   if (!isComplete) {
     return (
       <div className="mx-auto max-w-xl px-4 py-12 sm:px-6">
-        <div className="rounded-[2rem] border border-[#E8CED5] bg-[#FFFDFB] p-8 text-center space-y-5">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#FDF0F3] text-[#A9506C]">
+        <div className="rounded-[2rem] border border-[#EAD3E0] bg-[#FFFCFA] p-8 text-center space-y-5">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#FDF0F5] text-[#C04472]">
             <AlertTriangle className="h-6 w-6" aria-hidden="true" />
           </div>
-          <h1 className="font-display text-2xl font-bold text-[#381F2E]">
+          <h1 className="font-display text-2xl font-bold text-[#351B38]">
             الاختبار غير مكتمل بعد
           </h1>
-          <p className="text-sm leading-relaxed text-[#69495B]">
+          <p className="text-sm leading-relaxed text-[#5F4163]">
             للحصول على ملف اهتمامات دقيق، يجب الإجابة على جميع الأسئلة الثلاثين. تبقى لديكِ{' '}
             <strong className="tabular-nums">{missingQuestionIndices.length}</strong> أسئلة لم
             تكتمل (أولها السؤال رقم{' '}
@@ -63,7 +64,7 @@ export function AnalyzingPage({
                 onJumpToQuestion((missingQuestionIndices[0] ?? 1) - 1);
                 onNavigate('/quiz');
               }}
-              className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-[#A9506C] px-7 py-2.5 text-sm font-medium text-white hover:bg-[#913F59] cursor-pointer"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-gradient-to-l from-[#C04472] to-[#7651B8] px-7 py-2.5 text-sm font-medium text-white hover:opacity-95 cursor-pointer"
             >
               <span>الانتقال إلى السؤال الناقص</span>
               <ArrowLeft className="h-4 w-4" aria-hidden="true" />
@@ -76,44 +77,42 @@ export function AnalyzingPage({
 
   return (
     <div className="mx-auto max-w-xl px-4 py-12 sm:px-6">
-      <div className="rounded-[2rem] border border-[#D8CBE7] bg-[#FFFDFB] p-7 sm:p-10 text-center space-y-6 shadow-[0_12px_40px_-24px_rgba(142,116,168,0.28)]">
-        <div className="flex justify-center">
-          <CharacterStage
-            characterId="analyzing_fairy"
-            variant="scene"
-            eager={true}
-            interactive={false}
-            className="w-full max-w-[340px]"
-          />
-        </div>
+      <div className="rounded-[2rem] border border-[#D8C9F2] bg-[#FFFCFA] p-7 sm:p-10 text-center space-y-6 shadow-[0_16px_48px_-24px_rgba(118,81,184,0.28)]">
+        <Zahrti3DStage
+          mode="analyzing"
+          heightClass="h-[260px] sm:h-[300px]"
+          hintText="تتجمع الإجابات عبر الأنماط الستة لتشكيل خريطتكِ"
+        />
 
         {!analysisError ? (
           <div className="space-y-4">
-            <h1 className="font-display text-2xl font-bold text-[#381F2E]">
+            <h1 className="font-display text-2xl font-bold text-[#351B38]">
               جاري تحليل نتائجكِ...
             </h1>
-            <p className="text-sm text-[#69495B]">
-              تجمع جنية الزهور استجاباتكِ عبر الأنماط الستة (RIASEC) ونرتب التخصصات الأقرب لاهتماماتج.
+            <p className="text-sm text-[#5F4163]">
+              نرتب الآن درجاتكِ الفعلية عبر أنماط الاهتمام الستة (RIASEC) ونطابقها مع التخصصات دون
+              أي نتائج افتراضية.
             </p>
             <div
-              className="mx-auto max-w-xs h-2.5 overflow-hidden rounded-full bg-[#EFE8F6]"
+              className="mx-auto max-w-xs h-2.5 overflow-hidden rounded-full bg-[#EFE8FA]"
               role="status"
               aria-label="جاري التحليل"
             >
-              <div
-                className={`h-full rounded-full bg-[#8E74A8] transition-all duration-700 ${
-                  isAnalyzing ? 'w-4/5' : 'w-2/3'
-                }`}
+              <motion.div
+                initial={{ width: '25%' }}
+                animate={{ width: isAnalyzing ? '88%' : '68%' }}
+                transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+                className="h-full rounded-full bg-gradient-to-l from-[#C04472] to-[#7651B8]"
               />
             </div>
           </div>
         ) : (
           <div className="space-y-4" role="alert">
-            <h1 className="font-display text-xl font-bold text-[#381F2E]">
+            <h1 className="font-display text-xl font-bold text-[#351B38]">
               تعذر التحليل عبر الخادم مؤقتاً
             </h1>
-            <p className="text-sm leading-relaxed text-[#8B2945]">{analysisError}</p>
-            <p className="text-xs text-[#69495B]">
+            <p className="text-sm leading-relaxed text-[#9B2953]">{analysisError}</p>
+            <p className="text-xs text-[#5F4163]">
               إجاباتج الثلاثون محفوظة بأمان على جهازج ولن تضيع.
             </p>
             <div className="flex flex-wrap justify-center gap-3 pt-2">
@@ -123,7 +122,7 @@ export function AnalyzingPage({
                   const res = await onRunAnalysis(false);
                   if (res) onNavigate('/results');
                 }}
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-[#A9506C] px-6 py-2.5 text-sm font-medium text-white hover:bg-[#913F59] cursor-pointer"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-[#C04472] px-6 py-2.5 text-sm font-medium text-white hover:bg-[#A6345F] cursor-pointer"
               >
                 <RefreshCw className="h-4 w-4" aria-hidden="true" />
                 <span>إعادة المحاولة</span>
@@ -134,7 +133,7 @@ export function AnalyzingPage({
                   const res = await onRunAnalysis(true);
                   if (res) onNavigate('/results');
                 }}
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-[#E8CED5] bg-[#FBF1F3] px-6 py-2.5 text-sm font-medium text-[#381F2E] hover:bg-[#F4DCE2] cursor-pointer"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-[#EAD3E0] bg-[#FDF0F5] px-6 py-2.5 text-sm font-medium text-[#351B38] hover:bg-[#FADCE8] cursor-pointer"
               >
                 <span>عرض التحليل المحلي (تجريبي موثق)</span>
               </button>

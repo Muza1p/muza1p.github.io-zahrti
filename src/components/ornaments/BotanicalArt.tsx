@@ -9,33 +9,33 @@ export function ZahrtiBlossomMark({ className = 'w-7 h-7' }: { className?: strin
       aria-hidden="true"
       className={className}
     >
-      {/* Five layered petals in soft blush and dusty rose */}
+      {/* Five layered petals in Rose & Berry Pink */}
       <path
         d="M24 6C28 6 31 11 29 17C35 15 40 18 40 22C40 26 35 29 29 27C31 33 28 38 24 38C20 38 17 33 19 27C13 29 8 26 8 22C8 18 13 15 19 17C17 11 20 6 24 6Z"
-        fill="#F4DCE2"
-        stroke="#A9506C"
+        fill="#F9D5E3"
+        stroke="#C04472"
         strokeWidth="1.6"
         strokeLinejoin="round"
       />
       <path
         d="M24 11C26.5 11 28 14.5 26.8 18.5C30.8 17.3 34.3 19 34.3 21.5C34.3 24 30.8 25.7 26.8 24.5C28 28.5 26.5 32 24 32C21.5 32 20 28.5 21.2 24.5C17.2 25.7 13.7 24 13.7 21.5C13.7 19 17.2 17.3 21.2 18.5C20 14.5 21.5 11 24 11Z"
-        fill="#EAC1CC"
-        opacity="0.7"
+        fill="#F2A6C1"
+        opacity="0.72"
       />
-      <circle cx="24" cy="21.5" r="4" fill="#A9506C" />
-      <circle cx="24" cy="21.5" r="1.6" fill="#FDF9F6" />
+      <circle cx="24" cy="21.5" r="4.2" fill="#C04472" />
+      <circle cx="24" cy="21.5" r="1.7" fill="#D5B36A" />
       {/* Small botanical leaves */}
       <path
         d="M17 36C13 38 11 41 12 43C15 43 18 40 19 37"
-        fill="#DCE6DC"
-        stroke="#7D967E"
+        fill="#DFECE3"
+        stroke="#6E947E"
         strokeWidth="1.3"
         strokeLinecap="round"
       />
       <path
         d="M31 36C35 38 37 41 36 43C33 43 30 40 29 37"
-        fill="#DCE6DC"
-        stroke="#7D967E"
+        fill="#DFECE3"
+        stroke="#6E947E"
         strokeWidth="1.3"
         strokeLinecap="round"
       />
@@ -54,43 +54,45 @@ export function CoquetteRibbonBow({ className = 'w-16 h-9' }: { className?: stri
       {/* Left loop */}
       <path
         d="M54 27C39 11 16 12 14 24C12 36 33 40 54 31Z"
-        fill="#F4D4DC"
-        stroke="#A9506C"
+        fill="#FAD3E2"
+        stroke="#C04472"
         strokeWidth="1.8"
         strokeLinejoin="round"
       />
       <path
         d="M49 28C37 19 23 20 22 25C21 30 34 32 49 29"
-        stroke="#C97D95"
+        stroke="#7651B8"
         strokeWidth="1.2"
         strokeLinecap="round"
+        opacity="0.55"
       />
       {/* Right loop */}
       <path
         d="M66 27C81 11 104 12 106 24C108 36 87 40 66 31Z"
-        fill="#F4D4DC"
-        stroke="#A9506C"
+        fill="#FAD3E2"
+        stroke="#C04472"
         strokeWidth="1.8"
         strokeLinejoin="round"
       />
       <path
         d="M71 28C83 19 97 20 98 25C99 30 86 32 71 29"
-        stroke="#C97D95"
+        stroke="#7651B8"
         strokeWidth="1.2"
         strokeLinecap="round"
+        opacity="0.55"
       />
       {/* Hanging ribbons */}
       <path
         d="M55 32C49 43 43 52 36 58L44 55L47 60C52 51 56 42 58 34"
-        fill="#F7E0E6"
-        stroke="#A9506C"
+        fill="#FCE3ED"
+        stroke="#C04472"
         strokeWidth="1.6"
         strokeLinejoin="round"
       />
       <path
         d="M65 32C71 43 77 52 84 58L76 55L73 60C68 51 64 42 62 34"
-        fill="#F7E0E6"
-        stroke="#A9506C"
+        fill="#FCE3ED"
+        stroke="#C04472"
         strokeWidth="1.6"
         strokeLinejoin="round"
       />
@@ -101,8 +103,8 @@ export function CoquetteRibbonBow({ className = 'w-16 h-9' }: { className?: stri
         width="14"
         height="13"
         rx="5"
-        fill="#E5AEBE"
-        stroke="#A9506C"
+        fill="#F2A6C1"
+        stroke="#C04472"
         strokeWidth="1.8"
       />
     </svg>
@@ -112,9 +114,9 @@ export function CoquetteRibbonBow({ className = 'w-16 h-9' }: { className?: stri
 export function FloralDivider({ className = 'my-8' }: { className?: string }) {
   return (
     <div className={`flex items-center justify-center gap-4 ${className}`} aria-hidden="true">
-      <div className="h-px flex-1 bg-gradient-to-l from-[#E8CED5] to-transparent" />
-      <CoquetteRibbonBow className="w-12 h-6 opacity-85" />
-      <div className="h-px flex-1 bg-gradient-to-r from-[#E8CED5] to-transparent" />
+      <div className="h-px flex-1 bg-gradient-to-l from-[#EAD3E0] via-[#D5B36A]/45 to-transparent" />
+      <CoquetteRibbonBow className="w-12 h-6 opacity-90" />
+      <div className="h-px flex-1 bg-gradient-to-r from-[#EAD3E0] via-[#B49AE8]/45 to-transparent" />
     </div>
   );
 }

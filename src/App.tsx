@@ -1,4 +1,5 @@
 import React from 'react';
+import { MotionConfig } from 'motion/react';
 import { Footer } from '@/src/components/layout/Footer';
 import { Navbar } from '@/src/components/layout/Navbar';
 import { useAssessment } from '@/src/hooks/useAssessment';
@@ -166,29 +167,31 @@ export default function App() {
       : 'zahrti-theme-home';
 
   return (
-    <div
-      dir="rtl"
-      className={`${themeClass} min-h-screen flex flex-col text-[#381F2E]`}
-    >
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:right-3 focus:z-50 focus:rounded-full focus:bg-[#A9506C] focus:px-4 focus:py-2 focus:text-sm focus:text-white"
+    <MotionConfig reducedMotion="user">
+      <div
+        dir="rtl"
+        className={`${themeClass} min-h-screen flex flex-col text-[#351B38]`}
       >
-        تخطي إلى المحتوى الرئيسي
-      </a>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:right-3 focus:z-50 focus:rounded-full focus:bg-[#C04472] focus:px-4 focus:py-2 focus:text-sm focus:text-white"
+        >
+          تخطي إلى المحتوى الرئيسي
+        </a>
 
-      <Navbar
-        currentPath={pathname}
-        onNavigate={navigate}
-        answeredCount={assessment.answeredCount}
-        hasResult={Boolean(assessment.latestResult)}
-      />
+        <Navbar
+          currentPath={pathname}
+          onNavigate={navigate}
+          answeredCount={assessment.answeredCount}
+          hasResult={Boolean(assessment.latestResult)}
+        />
 
-      <main id="main-content" className="flex-1">
-        {renderPage()}
-      </main>
+        <main id="main-content" className="flex-1">
+          {renderPage()}
+        </main>
 
-      <Footer onNavigate={navigate} />
-    </div>
+        <Footer onNavigate={navigate} />
+      </div>
+    </MotionConfig>
   );
 }

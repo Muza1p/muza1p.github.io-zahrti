@@ -42,7 +42,7 @@ export function Navbar({
     : '/intro';
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[#E8CED5]/80 bg-[#FDF9F6]/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-40 border-b border-[#EAD3E0] bg-[#FFF8F3]/98">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-8 px-4 py-3 sm:px-6">
         {/* Zone 1: Single-line Brand Wordmark */}
         <a
@@ -51,7 +51,7 @@ export function Navbar({
             e.preventDefault();
             handleLinkClick('/');
           }}
-          className="flex items-center gap-2.5 whitespace-nowrap shrink-0 text-[#381F2E] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#A9506C] rounded-lg"
+          className="flex items-center gap-2.5 whitespace-nowrap shrink-0 text-[#351B38] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C04472] rounded-lg"
         >
           <ZahrtiBlossomMark className="h-7 w-7 shrink-0" />
           <span className="font-display text-lg font-bold tracking-tight">
@@ -62,7 +62,7 @@ export function Navbar({
         {/* Zone 2: 4 concise single-line text nav links */}
         <nav
           aria-label="التنقل الرئيسي"
-          className="hidden md:flex items-center gap-7 text-sm font-medium text-[#69495B]"
+          className="hidden md:flex items-center gap-7 text-sm font-medium text-[#5F4163]"
         >
           {NAV_LINKS.map((link) => {
             const isActive =
@@ -79,8 +79,8 @@ export function Navbar({
                 aria-current={isActive ? 'page' : undefined}
                 className={`whitespace-nowrap shrink-0 py-1 transition-colors border-b-2 ${
                   isActive
-                    ? 'border-[#A9506C] text-[#381F2E] font-semibold'
-                    : 'border-transparent hover:text-[#381F2E] hover:border-[#E8CED5]'
+                    ? 'border-[#C04472] text-[#351B38] font-semibold'
+                    : 'border-transparent hover:text-[#351B38] hover:border-[#F2A6C1]'
                 }`}
               >
                 {link.label}
@@ -94,7 +94,7 @@ export function Navbar({
           <button
             type="button"
             onClick={() => handleLinkClick(primaryCtaTarget)}
-            className="hidden sm:inline-flex items-center justify-center rounded-full bg-[#A9506C] px-5 py-2 text-sm font-medium text-white shadow-xs transition-colors hover:bg-[#913F59] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#A9506C] whitespace-nowrap shrink-0 cursor-pointer"
+            className="hidden sm:inline-flex items-center justify-center rounded-full bg-gradient-to-l from-[#C04472] to-[#7651B8] px-5 py-2 text-sm font-medium text-white shadow-xs transition-opacity hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C04472] whitespace-nowrap shrink-0 cursor-pointer"
           >
             {primaryCtaLabel}
           </button>
@@ -104,7 +104,7 @@ export function Navbar({
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? 'إغلاق القائمة' : 'فتح القائمة'}
-            className="inline-flex md:hidden min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-[#E8CED5] bg-[#FFFDFB] text-[#381F2E] hover:bg-[#F7E7EB] transition-colors cursor-pointer"
+            className="inline-flex md:hidden min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-[#EAD3E0] bg-[#FFFCFA] text-[#351B38] hover:bg-[#FDF0F5] transition-colors cursor-pointer"
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -115,7 +115,7 @@ export function Navbar({
       {mobileOpen && (
         <nav
           aria-label="قائمة الهاتف"
-          className="md:hidden border-t border-[#E8CED5] bg-[#FFFDFB] px-4 py-4 space-y-2"
+          className="md:hidden border-t border-[#EAD3E0] bg-[#FFFCFA] px-4 py-4 space-y-2"
         >
           <a
             href="/"
@@ -123,7 +123,7 @@ export function Navbar({
               e.preventDefault();
               handleLinkClick('/');
             }}
-            className="block rounded-xl px-4 py-2.5 text-sm font-medium text-[#381F2E] hover:bg-[#FBF1F3]"
+            className="block rounded-xl px-4 py-2.5 text-sm font-medium text-[#351B38] hover:bg-[#FDF0F5]"
           >
             الرئيسية
           </a>
@@ -137,8 +137,8 @@ export function Navbar({
               }}
               className={`block rounded-xl px-4 py-2.5 text-sm font-medium ${
                 currentPath === link.path
-                  ? 'bg-[#F7E7EB] text-[#381F2E] font-semibold'
-                  : 'text-[#69495B] hover:bg-[#FBF1F3]'
+                  ? 'bg-[#FDF0F5] text-[#C04472] font-semibold'
+                  : 'text-[#5F4163] hover:bg-[#FDF0F5]'
               }`}
             >
               {link.label}
@@ -150,7 +150,7 @@ export function Navbar({
               e.preventDefault();
               handleLinkClick('/methodology');
             }}
-            className="block rounded-xl px-4 py-2.5 text-sm font-medium text-[#69495B] hover:bg-[#FBF1F3]"
+            className="block rounded-xl px-4 py-2.5 text-sm font-medium text-[#5F4163] hover:bg-[#FDF0F5]"
           >
             المصادر والمنهجية
           </a>
@@ -158,7 +158,7 @@ export function Navbar({
             <button
               type="button"
               onClick={() => handleLinkClick(primaryCtaTarget)}
-              className="w-full min-h-[44px] rounded-full bg-[#A9506C] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#913F59] cursor-pointer"
+              className="w-full min-h-[44px] rounded-full bg-gradient-to-l from-[#C04472] to-[#7651B8] px-5 py-2.5 text-sm font-medium text-white hover:opacity-95 cursor-pointer"
             >
               {primaryCtaLabel}
             </button>

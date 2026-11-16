@@ -76,29 +76,29 @@ export function ComparePage({
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 space-y-8">
       <header className="space-y-2">
         <CoquetteRibbonBow className="w-12 h-7" />
-        <h1 className="font-display text-3xl sm:text-4xl font-bold text-[#381F2E]">
+        <h1 className="font-display text-3xl sm:text-4xl font-bold text-[#351B38]">
           مقارنة التخصصات
         </h1>
-        <p className="max-w-2xl text-sm sm:text-base text-[#69495B]">
+        <p className="max-w-2xl text-sm sm:text-base text-[#5F4163]">
           قارني بين تخصصين أو ثلاثة لفهم الفروق في طبيعة الدراسة، المواد، المهارات، والتحديات.
           هذه المقارنة للمساعدة على الفهم وليست ترتيباً للأفضلية.
         </p>
       </header>
 
       {/* Selected majors chips + add dropdown */}
-      <section className="rounded-3xl border border-[#E8CED5] bg-[#FFFDFB] p-5">
+      <section className="rounded-3xl border border-[#EAD3E0] bg-[#FFFCFA] p-5">
         <div className="flex flex-wrap items-center gap-3">
           {selectedMajors.map((m) => (
             <div
               key={m.id}
-              className="inline-flex items-center gap-2 rounded-2xl border border-[#E8CED5] bg-[#FBF1F3] px-3.5 py-2 text-sm font-medium text-[#381F2E]"
+              className="inline-flex items-center gap-2 rounded-2xl border border-[#F2C6D8] bg-[#FDF0F5] px-3.5 py-2 text-sm font-medium text-[#351B38]"
             >
               <span>{m.nameAr}</span>
               <button
                 type="button"
                 onClick={() => onToggleCompare(m.id)}
                 aria-label={`إزالة ${m.nameAr} من المقارنة`}
-                className="rounded-full p-0.5 text-[#69495B] hover:bg-[#F4DCE2] hover:text-[#381F2E] cursor-pointer"
+                className="rounded-full p-0.5 text-[#5F4163] hover:bg-[#FADCE8] hover:text-[#351B38] cursor-pointer"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -112,14 +112,14 @@ export function ComparePage({
               </label>
               <div className="relative flex items-center">
                 <Plus
-                  className="pointer-events-none absolute right-3 h-4 w-4 text-[#A9506C]"
+                  className="pointer-events-none absolute right-3 h-4 w-4 text-[#C04472]"
                   aria-hidden="true"
                 />
                 <select
                   id="add-compare-select"
                   defaultValue=""
                   onChange={handleAddSelect}
-                  className="w-full min-h-[42px] rounded-2xl border border-[#E8CED5] bg-[#FDF9F6] pr-9 pl-8 text-sm text-[#381F2E] focus:border-[#A9506C] focus:outline-none cursor-pointer"
+                  className="w-full min-h-[42px] rounded-2xl border border-[#EAD3E0] bg-[#FFF8F3] pr-9 pl-8 text-sm text-[#351B38] focus:border-[#C04472] focus:outline-none cursor-pointer"
                 >
                   <option value="" disabled>
                     أضيفي تخصصاً للمقارنة...
@@ -137,17 +137,17 @@ export function ComparePage({
       </section>
 
       {selectedMajors.length < 2 ? (
-        <div className="rounded-3xl border border-[#E8CED5] bg-[#FFFDFB] p-8 text-center space-y-4">
-          <p className="font-display text-lg font-bold text-[#381F2E]">
+        <div className="rounded-3xl border border-[#EAD3E0] bg-[#FFFCFA] p-8 text-center space-y-4">
+          <p className="font-display text-lg font-bold text-[#351B38]">
             اختاري تخصصين على الأقل للبدء بالمقارنة
           </p>
-          <p className="text-sm text-[#69495B]">
+          <p className="text-sm text-[#5F4163]">
             يمكنكِ إضافة تخصصات من القائمة أعلاه أو عبر دليل التخصصات.
           </p>
           <button
             type="button"
             onClick={() => onNavigate('/majors')}
-            className="rounded-full bg-[#A9506C] px-6 py-2.5 text-sm font-medium text-white hover:bg-[#913F59] cursor-pointer"
+            className="rounded-full bg-gradient-to-l from-[#C04472] to-[#7651B8] px-6 py-2.5 text-sm font-medium text-white hover:opacity-95 cursor-pointer"
           >
             استعراض التخصصات
           </button>
@@ -163,10 +163,10 @@ export function ComparePage({
             {selectedMajors.map((major) => (
               <article
                 key={major.id}
-                className="rounded-3xl border border-[#E8CED5] bg-[#FFFDFB] p-6 flex flex-col justify-between gap-5"
+                className="rounded-3xl border border-[#EAD3E0] bg-[#FFFCFA] p-6 flex flex-col justify-between gap-5"
               >
                 <div className="space-y-5">
-                  <div className="flex items-start gap-3.5 pb-4 border-b border-[#F2E2E6]">
+                  <div className="flex items-start gap-3.5 pb-4 border-b border-[#F2E2EB]">
                     <CharacterStage
                       characterId={DOMAIN_CHARACTER_MAP[major.category]}
                       variant="avatar"
@@ -174,28 +174,61 @@ export function ComparePage({
                       className="h-16 w-16 shrink-0"
                     />
                     <div>
-                      <p className="text-xs text-[#7A596C]">
-                        {major.categoryLabelAr} · {major.credentialLabelAr}
+                      <p className="text-xs text-[#6E5073]">
+                        {major.categoryLabelAr} ·{' '}
+                        <span className="font-semibold text-[#7651B8]">
+                          {major.credentialLabelAr}
+                        </span>
                       </p>
-                      <h2 className="font-display text-lg font-bold text-[#381F2E]">
+                      <h2 className="font-display text-lg font-bold text-[#351B38]">
                         {major.nameAr}
                       </h2>
                     </div>
                   </div>
 
+                  {/* Interactive RIASEC Weight Visual Bars */}
+                  <div className="rounded-2xl border border-[#F2E2EB] bg-[#FFF8F3] p-3.5 space-y-2">
+                    <p className="font-display text-xs font-bold text-[#7651B8]">
+                      أبرز أبعاد الاهتمام في هذا التخصص
+                    </p>
+                    <div className="space-y-1.5">
+                      {RIASEC_ORDER.map((code) => {
+                        const w = Math.round((major.riasecWeights[code] ?? 0) * 100);
+                        if (w < 15) return null;
+                        return (
+                          <div key={code} className="space-y-0.5">
+                            <div className="flex justify-between text-[11px] text-[#5F4163]">
+                              <span>{RIASEC_PROFILES[code].nameAr.replace('النمط ', '')}</span>
+                              <span className="tabular-nums font-semibold">{w}%</span>
+                            </div>
+                            <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#EFE5EE]">
+                              <div
+                                className="h-full rounded-full"
+                                style={{
+                                  width: `${w}%`,
+                                  backgroundColor: RIASEC_PROFILES[code].colorHex,
+                                }}
+                              />
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
                   <div className="space-y-4 text-sm">
                     <div>
-                      <h3 className="font-display text-xs font-bold text-[#A9506C] mb-1">
+                      <h3 className="font-display text-xs font-bold text-[#C04472] mb-1">
                         طبيعة الدراسة
                       </h3>
-                      <p className="text-[#573E4E] leading-relaxed">{major.studyNatureAr}</p>
+                      <p className="text-[#4F3553] leading-relaxed">{major.studyNatureAr}</p>
                     </div>
 
                     <div>
-                      <h3 className="font-display text-xs font-bold text-[#A9506C] mb-1">
+                      <h3 className="font-display text-xs font-bold text-[#C04472] mb-1">
                         أبرز المواد
                       </h3>
-                      <ul className="list-disc list-inside text-[#573E4E] space-y-0.5">
+                      <ul className="list-disc list-inside text-[#4F3553] space-y-0.5">
                         {major.sampleSubjectsAr.slice(0, 4).map((s) => (
                           <li key={s}>{s}</li>
                         ))}
@@ -203,10 +236,10 @@ export function ComparePage({
                     </div>
 
                     <div>
-                      <h3 className="font-display text-xs font-bold text-[#A9506C] mb-1">
+                      <h3 className="font-display text-xs font-bold text-[#C04472] mb-1">
                         المهارات المطلوبة
                       </h3>
-                      <ul className="list-disc list-inside text-[#573E4E] space-y-0.5">
+                      <ul className="list-disc list-inside text-[#4F3553] space-y-0.5">
                         {major.usefulSkillsAr.slice(0, 3).map((sk) => (
                           <li key={sk}>{sk}</li>
                         ))}
@@ -214,21 +247,10 @@ export function ComparePage({
                     </div>
 
                     <div>
-                      <h3 className="font-display text-xs font-bold text-[#A9506C] mb-1">
-                        أنشطة تهم الطالبة فيه
-                      </h3>
-                      <ul className="list-disc list-inside text-[#573E4E] space-y-0.5">
-                        {major.appealingActivitiesAr.map((act) => (
-                          <li key={act}>{act}</li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div>
-                      <h3 className="font-display text-xs font-bold text-[#8B2945] mb-1">
+                      <h3 className="font-display text-xs font-bold text-[#9F7C33] mb-1">
                         التحديات
                       </h3>
-                      <ul className="list-disc list-inside text-[#573E4E] space-y-0.5">
+                      <ul className="list-disc list-inside text-[#4F3553] space-y-0.5">
                         {major.challengesAr.map((ch) => (
                           <li key={ch}>{ch}</li>
                         ))}
@@ -236,10 +258,10 @@ export function ComparePage({
                     </div>
 
                     <div>
-                      <h3 className="font-display text-xs font-bold text-[#8E74A8] mb-1">
+                      <h3 className="font-display text-xs font-bold text-[#7651B8] mb-1">
                         مجالات العمل المحتملة
                       </h3>
-                      <ul className="list-disc list-inside text-[#573E4E] space-y-0.5">
+                      <ul className="list-disc list-inside text-[#4F3553] space-y-0.5">
                         {major.potentialCareersAr.map((job) => (
                           <li key={job}>{job}</li>
                         ))}
@@ -248,11 +270,11 @@ export function ComparePage({
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-[#F2E2E6]">
+                <div className="pt-3 border-t border-[#F2E2EB]">
                   <button
                     type="button"
                     onClick={() => onNavigate(`/majors/${major.id}`)}
-                    className="w-full inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-full border border-[#E8CED5] bg-[#FBF1F3] px-4 py-2 text-xs font-medium text-[#381F2E] hover:bg-[#F4DCE2] cursor-pointer"
+                    className="w-full inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-full border border-[#F2C6D8] bg-[#FDF0F5] px-4 py-2 text-xs font-medium text-[#351B38] hover:bg-[#FADCE8] cursor-pointer"
                   >
                     <span>عرض الصفحة الكاملة للتخصص</span>
                     <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
@@ -264,15 +286,15 @@ export function ComparePage({
 
           {/* Dynamic similarities & differences summary */}
           {comparisonSummary && (
-            <section className="rounded-3xl border border-[#D8CBE7] bg-[#F8F4FB] p-6 space-y-4 text-sm text-[#573E4E]">
-              <div className="flex items-center gap-2 font-display font-bold text-[#381F2E]">
-                <Info className="h-4 w-4 text-[#8E74A8]" aria-hidden="true" />
+            <section className="rounded-3xl border border-[#D8C9F2] bg-[#F4EFFB] p-6 space-y-4 text-sm text-[#4F3553]">
+              <div className="flex items-center gap-2 font-display font-bold text-[#351B38]">
+                <Info className="h-4 w-4 text-[#7651B8]" aria-hidden="true" />
                 <span>نقاط التشابه والاختلاف بين التخصصات المختارة</span>
               </div>
 
               <div className="grid gap-4 md:grid-cols-2">
-                <div className="rounded-2xl border border-[#E4D9F0] bg-[#FFFDFB] p-4 space-y-1.5">
-                  <h3 className="font-display text-xs font-bold text-[#8E74A8]">
+                <div className="rounded-2xl border border-[#E2D5F5] bg-[#FFFCFA] p-4 space-y-1.5">
+                  <h3 className="font-display text-xs font-bold text-[#7651B8]">
                     أوجه التشابه المشتركة
                   </h3>
                   <p className="leading-relaxed">
@@ -296,8 +318,8 @@ export function ComparePage({
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-[#E4D9F0] bg-[#FFFDFB] p-4 space-y-1.5">
-                  <h3 className="font-display text-xs font-bold text-[#A9506C]">
+                <div className="rounded-2xl border border-[#E2D5F5] bg-[#FFFCFA] p-4 space-y-1.5">
+                  <h3 className="font-display text-xs font-bold text-[#C04472]">
                     أبرز الفروق والتركيز لكل مسار
                   </h3>
                   <ul className="space-y-1 text-xs sm:text-sm">

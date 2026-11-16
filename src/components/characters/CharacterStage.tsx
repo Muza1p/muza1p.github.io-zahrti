@@ -109,18 +109,18 @@ export function CharacterStage({
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 overflow-hidden"
           >
-            <span className="kawaii-sparkle-1 absolute bottom-4 right-5 text-sm text-[#A9506C]">♥</span>
-            <span className="kawaii-sparkle-2 absolute bottom-6 left-6 text-sm text-[#D4AF6A]">✦</span>
-            <span className="kawaii-sparkle-3 absolute bottom-8 right-1/2 text-xs text-[#8E74A8]">✦</span>
+            <span className="kawaii-sparkle-1 absolute bottom-4 right-5 text-sm text-[#C04472]">♥</span>
+            <span className="kawaii-sparkle-2 absolute bottom-6 left-6 text-sm text-[#D5B36A]">✦</span>
+            <span className="kawaii-sparkle-3 absolute bottom-8 right-1/2 text-xs text-[#7651B8]">✦</span>
           </div>
         )}
 
         {interactive && variant !== 'avatar' && (
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute bottom-2.5 left-2.5 inline-flex items-center gap-1 rounded-full bg-[#FFFDFB]/90 px-2.5 py-1 text-[11px] font-medium text-[#69495B] shadow-xs backdrop-blur-xs opacity-90 group-hover:opacity-100 transition-opacity"
+            className="pointer-events-none absolute bottom-2.5 left-2.5 inline-flex items-center gap-1 rounded-full bg-[#FFF8F3]/95 px-2.5 py-1 text-[11px] font-medium text-[#5F4163] shadow-xs opacity-90 group-hover:opacity-100 transition-opacity"
           >
-            <Sparkles className="h-3 w-3 text-[#D4AF6A]" />
+            <Sparkles className="h-3 w-3 text-[#D5B36A]" />
             <span>اضغطي للتفاعل</span>
           </span>
         )}
@@ -128,10 +128,10 @@ export function CharacterStage({
 
       {showCaption && (
         <div className="px-2 pt-2.5 pb-1 text-center space-y-1">
-          <p className="font-display text-xs font-bold text-[#381F2E]">
+          <p className="font-display text-xs font-bold text-[#351B38]">
             {character.nameAr}
           </p>
-          <p className="text-xs leading-relaxed text-[#573E4E]">
+          <p className="text-xs leading-relaxed text-[#5F4163]">
             {activeMessage}
           </p>
         </div>
@@ -148,7 +148,7 @@ export function CharacterStage({
       type="button"
       onClick={triggerReaction}
       aria-label={`${character.nameAr}: ${activeMessage}`}
-      className={`block text-right focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#A9506C] ${
+      className={`block text-right focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C04472] ${
         variant === 'avatar' ? 'rounded-2xl' : 'rounded-[2rem]'
       } ${className || 'w-full'}`}
     >
