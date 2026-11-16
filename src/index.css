@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Alexandria", "Tajawal", system-ui, sans-serif;
+  --font-sans: "Tajawal", "Alexandria", system-ui, sans-serif;
+
+  /* 3D Kawaii Universe & Coquette Editorial Palette (No Orange, No Neon) */
+  --color-cream-ivory: #FDF9F6;
+  --color-warm-white: #FFFDFB;
+  --color-baby-pink: #FCEBF0;
+  --color-soft-blush: #F7E7EB;
+  --color-blush-tint: #FBF1F3;
+  --color-rose-mauve: #C48397;
+  --color-berry-pink: #A9506C;
+  --color-berry-hover: #913F59;
+  --color-dusty-rose: #A9506C;
+  --color-dusty-rose-hover: #913F59;
+  --color-rose-border: #E8CED5;
+  --color-muted-lavender: #8E74A8;
+  --color-soft-purple: #9C83B8;
+  --color-lavender-tint: #F4EFF8;
+  --color-soft-mauve: #C99AA8;
+  --color-dark-plum: #381F2E;
+  --color-muted-plum: #69495B;
+  --color-soft-gold: #D4AF6A;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+  }
+
+  h1, h2 {
+    text-wrap: balance;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Harmonized per-section pastel themes (no monochrome fatigue, zero neon/orange) */
+.zahrti-paper-bg {
+  background-color: #FDF9F6;
+  background-image:
+    radial-gradient(at 10% 10%, rgba(252, 235, 240, 0.55) 0px, transparent 52%),
+    radial-gradient(at 90% 18%, rgba(226, 212, 238, 0.34) 0px, transparent 48%),
+    radial-gradient(at 50% 92%, rgba(247, 231, 235, 0.4) 0px, transparent 55%);
+}
+
+.zahrti-theme-home {
+  background-color: #FDF9F6;
+  background-image:
+    radial-gradient(at 14% 8%, rgba(252, 235, 240, 0.72) 0px, transparent 54%),
+    radial-gradient(at 88% 16%, rgba(235, 224, 244, 0.45) 0px, transparent 48%),
+    radial-gradient(at 50% 88%, rgba(247, 231, 235, 0.45) 0px, transparent 55%);
+}
+
+.zahrti-theme-quiz {
+  background-color: #FAF7FC;
+  background-image:
+    radial-gradient(at 15% 12%, rgba(232, 221, 244, 0.6) 0px, transparent 52%),
+    radial-gradient(at 85% 22%, rgba(250, 232, 238, 0.45) 0px, transparent 48%),
+    radial-gradient(at 50% 90%, rgba(244, 239, 248, 0.65) 0px, transparent 55%);
+}
+
+.zahrti-theme-results {
+  background-color: #FDF8FA;
+  background-image:
+    radial-gradient(at 12% 10%, rgba(247, 231, 235, 0.65) 0px, transparent 52%),
+    radial-gradient(at 86% 18%, rgba(236, 224, 245, 0.48) 0px, transparent 48%),
+    radial-gradient(at 50% 85%, rgba(252, 235, 240, 0.55) 0px, transparent 55%);
+}
+
+.zahrti-theme-majors {
+  background-color: #FCF9F8;
+  background-image:
+    radial-gradient(at 10% 14%, rgba(244, 239, 248, 0.55) 0px, transparent 50%),
+    radial-gradient(at 92% 14%, rgba(252, 235, 240, 0.55) 0px, transparent 50%),
+    radial-gradient(at 50% 92%, rgba(246, 236, 241, 0.45) 0px, transparent 55%);
+}
+
+/* Lightweight GPU-compositor animations (transform & opacity only) */
+@keyframes kawaiiFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes kawaiiHop {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  35% {
+    transform: translateY(-8px) scale(1.025);
+  }
+  70% {
+    transform: translateY(1px) scale(0.99);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes kawaiiSparkleRise {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.6);
+  }
+  25% {
+    opacity: 1;
+    transform: translateY(-6px) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-34px) scale(0.85);
+  }
+}
+
+.kawaii-float {
+  animation: kawaiiFloat 5.5s ease-in-out infinite;
+}
+
+.kawaii-hop {
+  animation: kawaiiHop 0.46s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.kawaii-sparkle-1 {
+  animation: kawaiiSparkleRise 0.85s ease-out forwards;
+}
+
+.kawaii-sparkle-2 {
+  animation: kawaiiSparkleRise 0.95s ease-out 0.08s forwards;
+}
+
+.kawaii-sparkle-3 {
+  animation: kawaiiSparkleRise 1.05s ease-out 0.14s forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kawaii-float,
+  .kawaii-hop,
+  .kawaii-sparkle-1,
+  .kawaii-sparkle-2,
+  .kawaii-sparkle-3 {
+    animation: none !important;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  header, footer, .no-print {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #1f141a !important;
+  }
+  .print-break-inside-avoid {
+    break-inside: avoid;
+  }
+}

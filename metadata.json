@@ -1,0 +1,6 @@
+{
+  "name": "ZAHRTI — اختبار زهرتي",
+  "description": "اختبار زهرتي | اكتشفي التخصص اللي يشبهج — منصة عربية تفاعلية لاستكشاف الاهتمامات المهنية والتخصصات الجامعية.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
