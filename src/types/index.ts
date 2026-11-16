@@ -4,6 +4,19 @@ export type RiasecLetter = 'R' | 'I' | 'A' | 'S' | 'E' | 'C';
 
 export type LikertValue = 1 | 2 | 3 | 4 | 5;
 
+export type PersonId = 'person1' | 'person2';
+
+export interface ProfileIdentity {
+  id: PersonId;
+  name: string;
+  updatedAtIso: string | null;
+}
+
+export interface ProfilePrivacySettings {
+  person1IncludeInCompatibility: boolean;
+  person2IncludeInCompatibility: boolean;
+}
+
 export interface LikertOption {
   value: LikertValue;
   labelAr: string;
@@ -124,7 +137,8 @@ export interface Major {
 
 export interface MajorRecommendation {
   major: Major;
-  affinityScore: number; // Internal ranking metric only (never displayed as % success or guarantee)
+  affinityScore: number; // Cosine alignment scalar 0..1
+  affinityPercentage: number; // Computed percentage 0..100 derived transparently from cosine affinity
   matchedInterests: RiasecCode[];
   reasonAr: string;
   isCloseAlternative: boolean;
@@ -137,6 +151,7 @@ export interface SavedResultRecord {
   topAreaNamesAr: string[];
   answersString: string;
   scoringMode: ScoringSourceMode;
+  result?: AssessmentResult;
 }
 
 export interface AssessmentSessionState {
@@ -145,4 +160,49 @@ export interface AssessmentSessionState {
   startedAtMs: number | null;
   completedElapsedSeconds: number | null;
   lastUpdatedIso: string | null;
+}
+
+export interface CompatibilityDimensionItem {
+  code: RiasecCode;
+  nameAr: string;
+  person1Score: number;
+  person2Score: number;
+  difference: number;
+  noteAr: string;
+}
+
+export interface CompatibilityReport {
+  harmonyIndex: number; // 0..100 weighted cosine + proximity score
+  cosineSimilarityPct: number; // 0..100 directional profile similarity
+  proximityAlignmentPct: number; // 0..100 intensity proximity across dimensions
+  sharedStrengths: CompatibilityDimensionItem[];
+  complementaryDifferences: CompatibilityDimensionItem[];
+  allDimensionComparisons: CompatibilityDimensionItem[];
+  personalitySummaryPerson1Ar: string;
+  personalitySummaryPerson2Ar: string;
+  communicationTendencyAr: string;
+  decisionStyleAr: string;
+  sharedActivitiesAr: string[];
+  mutualUnderstandingTipsAr: string[];
+  person1TopCodes: RiasecCode[];
+  person2TopCodes: RiasecCode[];
+  calculatedAtIso: string;
+  formulaDescriptionAr: string;
+}
+
+export interface OurWorldState {
+  sharedNote: string;
+  updatedAtIso: string | null;
+}
+
+export interface PersonExportBundle {
+  schemaVersion: 2;
+  personId: PersonId;
+  name: string;
+  exportedAtIso: string;
+  session: AssessmentSessionState;
+  latestResult: AssessmentResult | null;
+  savedRecords: SavedResultRecord[];
+  favoriteMajorIds: string[];
+  compareIds: string[];
 }

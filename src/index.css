@@ -1,36 +1,32 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Alexandria", "Tajawal", system-ui, sans-serif;
-  --font-sans: "Tajawal", "Alexandria", system-ui, sans-serif;
+  --font-display: "Amiri", "Playfair Display", "Tajawal", Georgia, serif;
+  --font-sans: "Tajawal", system-ui, -apple-system, sans-serif;
 
-  /* ZAHRTI Premium Interactive Palette (Zero Orange, Zero Neon) */
-  --color-ivory: #FFF8F3;
-  --color-cream-ivory: #FFF8F3;
-  --color-warm-white: #FFFCFA;
-  --color-rose: #F2A6C1;
-  --color-lilac: #B49AE8;
-  --color-berry-pink: #C04472;
-  --color-berry-hover: #A6345F;
-  --color-royal-violet: #7651B8;
-  --color-royal-violet-hover: #613F9E;
-  --color-deep-plum: #351B38;
-  --color-muted-plum: #5F4163;
-  --color-soft-gold: #D5B36A;
-  --color-rose-border: #EAD3E0;
-  --color-lavender-tint: #F4EFFB;
-  --color-blush-tint: #FDF0F5;
+  /* ZAHRTI Luxury Editorial & Romantic Minimalism Palette */
+  --color-plum: #351B38;
+  --color-plum-soft: #4B2B4E;
+  --color-plum-muted: #5F4562;
+  --color-burgundy: #762D50;
+  --color-burgundy-hover: #5D223E;
+  --color-rose: #C47C91;
+  --color-blush: #E9D8D1;
+  --color-ivory: #F9F3EC;
+  --color-ivory-card: #FFFDF9;
+  --color-gold: #C6A56B;
+  --color-gold-deep: #9F7E44;
 }
 
 @layer base {
   html {
     font-family: var(--font-sans);
     scroll-behavior: smooth;
-    background-color: #FFF8F3;
+    background-color: #F9F3EC;
     color: #351B38;
   }
 
-  h1, h2, h3, h4, .font-display {
+  h1, h2, h3, .font-display {
     font-family: var(--font-display);
   }
 
@@ -43,109 +39,22 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Harmonized per-route atmospheric gradients — Ivory base with soft Rose, Lilac & Gold highlights */
-.zahrti-paper-bg,
-.zahrti-theme-home {
-  background-color: #FFF8F3;
+/* Subtle architectural editorial surfaces (no neon, no childish gradients) */
+.zahrti-editorial-canvas {
+  background-color: #F9F3EC;
   background-image:
-    radial-gradient(at 14% 6%, rgba(242, 166, 193, 0.28) 0px, transparent 52%),
-    radial-gradient(at 88% 12%, rgba(180, 154, 232, 0.24) 0px, transparent 48%),
-    radial-gradient(at 50% 90%, rgba(213, 179, 106, 0.12) 0px, transparent 55%);
+    radial-gradient(at 14% 4%, rgba(196, 124, 145, 0.14) 0px, transparent 48%),
+    radial-gradient(at 88% 12%, rgba(198, 165, 107, 0.11) 0px, transparent 46%),
+    radial-gradient(at 50% 94%, rgba(233, 216, 209, 0.35) 0px, transparent 58%);
 }
 
-.zahrti-theme-quiz {
-  background-color: #FBF7FE;
+.zahrti-quiz-canvas {
+  background-color: #FAF6F1;
   background-image:
-    radial-gradient(at 15% 10%, rgba(180, 154, 232, 0.28) 0px, transparent 54%),
-    radial-gradient(at 86% 20%, rgba(242, 166, 193, 0.22) 0px, transparent 50%),
-    radial-gradient(at 50% 90%, rgba(255, 248, 243, 0.85) 0px, transparent 55%);
-}
-
-.zahrti-theme-results {
-  background-color: #FFF8F3;
-  background-image:
-    radial-gradient(at 12% 8%, rgba(192, 68, 114, 0.14) 0px, transparent 52%),
-    radial-gradient(at 86% 14%, rgba(118, 81, 184, 0.16) 0px, transparent 50%),
-    radial-gradient(at 50% 88%, rgba(213, 179, 106, 0.14) 0px, transparent 55%);
-}
-
-.zahrti-theme-majors {
-  background-color: #FFF9F5;
-  background-image:
-    radial-gradient(at 10% 12%, rgba(180, 154, 232, 0.22) 0px, transparent 50%),
-    radial-gradient(at 90% 14%, rgba(242, 166, 193, 0.24) 0px, transparent 50%),
-    radial-gradient(at 50% 92%, rgba(213, 179, 106, 0.1) 0px, transparent 55%);
-}
-
-/* Lightweight GPU-compositor animations (transform & opacity only, zero pulse/neon) */
-@keyframes kawaiiFloat {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
-}
-
-@keyframes kawaiiHop {
-  0% {
-    transform: translateY(0) scale(1);
-  }
-  35% {
-    transform: translateY(-8px) scale(1.025);
-  }
-  70% {
-    transform: translateY(1px) scale(0.99);
-  }
-  100% {
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes kawaiiSparkleRise {
-  0% {
-    opacity: 0;
-    transform: translateY(6px) scale(0.6);
-  }
-  25% {
-    opacity: 1;
-    transform: translateY(-6px) scale(1.1);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-34px) scale(0.85);
-  }
-}
-
-.kawaii-float {
-  animation: kawaiiFloat 5.5s ease-in-out infinite;
-}
-
-.kawaii-hop {
-  animation: kawaiiHop 0.46s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.kawaii-sparkle-1 {
-  animation: kawaiiSparkleRise 0.85s ease-out forwards;
-}
-
-.kawaii-sparkle-2 {
-  animation: kawaiiSparkleRise 0.95s ease-out 0.08s forwards;
-}
-
-.kawaii-sparkle-3 {
-  animation: kawaiiSparkleRise 1.05s ease-out 0.14s forwards;
+    radial-gradient(at 50% 0%, rgba(233, 216, 209, 0.38) 0px, transparent 56%);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .kawaii-float,
-  .kawaii-hop,
-  .kawaii-sparkle-1,
-  .kawaii-sparkle-2,
-  .kawaii-sparkle-3 {
-    animation: none !important;
-  }
-
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

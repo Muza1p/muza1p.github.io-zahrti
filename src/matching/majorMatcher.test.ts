@@ -47,8 +47,10 @@ test('recommendMajorsForResult recommends 5 primary majors and 3 distinct close 
     topIds.some((id) => ['general-medicine', 'nursing', 'psychology', 'pharmacy'].includes(id)),
     true
   );
-  // Reasoning must never promise acceptance % or guarantee
+  // Reasoning must never promise acceptance % or guarantee, while affinityPercentage is 0..100 integer
   for (const rec of primaryRecommendations) {
+    assert.equal(Number.isInteger(rec.affinityPercentage), true);
+    assert.equal(rec.affinityPercentage >= 0 && rec.affinityPercentage <= 100, true);
     assert.equal(rec.reasonAr.includes('%'), false);
     assert.equal(rec.reasonAr.includes('بالتأكيد'), false);
   }

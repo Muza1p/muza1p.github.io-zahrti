@@ -7,6 +7,9 @@ const LazyZahrti3DCanvas = lazy(() => import('./Zahrti3DCanvas'));
 interface Zahrti3DStageProps {
   mode: Zahrti3DMode;
   scores?: Record<RiasecCode, RiasecAreaScore>;
+  harmonyIndex?: number;
+  bloomProgress?: number;
+  darkSurface?: boolean;
   className?: string;
   heightClass?: string;
   hintText?: string;
@@ -18,7 +21,9 @@ function checkWebGLSupport(): boolean {
     const canvas = document.createElement('canvas');
     return Boolean(
       window.WebGLRenderingContext &&
-        (canvas.getContext('webgl2') || canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
+        (canvas.getContext('webgl2') ||
+          canvas.getContext('webgl') ||
+          canvas.getContext('experimental-webgl'))
     );
   } catch {
     return false;
@@ -28,6 +33,9 @@ function checkWebGLSupport(): boolean {
 export function Zahrti3DStage({
   mode,
   scores,
+  harmonyIndex = 78,
+  bloomProgress = 1,
+  darkSurface = false,
   className = '',
   heightClass = 'h-[300px] sm:h-[360px]',
   hintText,
@@ -49,29 +57,56 @@ export function Zahrti3DStage({
 
   const show3D = webglReady && !reducedMotion && !prefer2D;
 
+  const containerSurface = darkSurface
+    ? 'border-[#C6A56B]/30 bg-gradient-to-br from-[#351B38] via-[#412144] to-[#27122A]'
+    : 'border-[#E9D8D1] bg-gradient-to-br from-[#F9F3EC] via-[#F4EAE3] to-[#EFE2DC]';
+
   return (
-    <div className={`space-y-2 ${className}`}>
-      <div
-        className={`relative w-full overflow-hidden rounded-[2rem] border border-[#EAD3E0] bg-gradient-to-br from-[#FFF8F3] via-[#FDF0F5] to-[#F4EFFB] ${heightClass}`}
-      >
+    <div className={`space-y-2.5 ${className}`}>
+      <div className={`relative w-full overflow-hidden rounded-3xl border ${containerSurface} ${heightClass}`}>
         {show3D ? (
-          <Suspense fallback={<Botanical2DFallback mode={mode} scores={scores} />}>
-            <LazyZahrti3DCanvas mode={mode} scores={scores} />
+          <Suspense
+            fallback={
+              <Botanical2DFallback
+                mode={mode}
+                scores={scores}
+                harmonyIndex={harmonyIndex}
+                darkSurface={darkSurface}
+              />
+            }
+          >
+            <LazyZahrti3DCanvas
+              mode={mode}
+              scores={scores}
+              harmonyIndex={harmonyIndex}
+              bloomProgress={bloomProgress}
+              darkSurface={darkSurface}
+            />
           </Suspense>
         ) : (
-          <Botanical2DFallback mode={mode} scores={scores} />
+          <Botanical2DFallback
+            mode={mode}
+            scores={scores}
+            harmonyIndex={harmonyIndex}
+            darkSurface={darkSurface}
+          />
         )}
       </div>
 
-      {/* Subtle caption + accessibility 2D/3D toggle BELOW canvas (never overlapping WebGL) */}
       {(hintText || (webglReady && !reducedMotion)) && (
-        <div className="flex flex-wrap items-center justify-between gap-2 px-2 text-xs text-[#5F4163]">
+        <div
+          className={`flex flex-wrap items-center justify-between gap-2 px-1 text-xs ${
+            darkSurface ? 'text-[#E9D8D1]/85' : 'text-[#5F4562]'
+          }`}
+        >
           <span>{hintText ?? ''}</span>
           {webglReady && !reducedMotion && (
             <button
               type="button"
               onClick={() => setPrefer2D((v) => !v)}
-              className="text-xs font-medium text-[#7651B8] hover:text-[#C04472] hover:underline cursor-pointer whitespace-nowrap"
+              className={`text-xs font-medium hover:underline cursor-pointer whitespace-nowrap ${
+                darkSurface ? 'text-[#C6A56B]' : 'text-[#762D50]'
+              }`}
             >
               {prefer2D ? 'تفعيل العرض ثلاثي الأبعاد' : 'التبديل للعرض الثابت'}
             </button>

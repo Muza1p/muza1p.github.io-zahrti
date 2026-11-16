@@ -1,8 +1,6 @@
 import React, { useMemo } from 'react';
 import { ArrowLeft, Info, Plus, X } from 'lucide-react';
-import { CharacterStage } from '@/src/components/characters/CharacterStage';
-import { CoquetteRibbonBow } from '@/src/components/ornaments/BotanicalArt';
-import { DOMAIN_CHARACTER_MAP } from '@/src/data/characters/kawaiiCharacters';
+import { CategoryIllustration, EditorialCrest } from '@/src/components/ornaments/BotanicalArt';
 import { RIASEC_ORDER, RIASEC_PROFILES } from '@/src/data/interests/riasecProfiles';
 import { MAJORS_CATALOG } from '@/src/data/majors/majorsCatalog';
 import { Major } from '@/src/types';
@@ -66,39 +64,36 @@ export function ComparePage({
 
   const handleAddSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const val = e.target.value;
-    if (!val) return;
-    if (selectedMajors.length >= 3) return;
+    if (!val || selectedMajors.length >= 3) return;
     onSetCompareIds([...selectedMajors.map((m) => m.id), val]);
     e.target.value = '';
   };
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 space-y-8">
-      <header className="space-y-2">
-        <CoquetteRibbonBow className="w-12 h-7" />
+      <header className="space-y-2 border-b border-[#E9D8D1] pb-6">
+        <EditorialCrest className="w-12 h-7" />
         <h1 className="font-display text-3xl sm:text-4xl font-bold text-[#351B38]">
-          مقارنة التخصصات
+          مقارنة التخصصات جنباً إلى جنب
         </h1>
-        <p className="max-w-2xl text-sm sm:text-base text-[#5F4163]">
+        <p className="max-w-2xl text-sm sm:text-base text-[#5F4562]">
           قارني بين تخصصين أو ثلاثة لفهم الفروق في طبيعة الدراسة، المواد، المهارات، والتحديات.
-          هذه المقارنة للمساعدة على الفهم وليست ترتيباً للأفضلية.
         </p>
       </header>
 
-      {/* Selected majors chips + add dropdown */}
-      <section className="rounded-3xl border border-[#EAD3E0] bg-[#FFFCFA] p-5">
+      <section className="rounded-2xl border border-[#E9D8D1] bg-[#FFFDF9] p-5">
         <div className="flex flex-wrap items-center gap-3">
           {selectedMajors.map((m) => (
             <div
               key={m.id}
-              className="inline-flex items-center gap-2 rounded-2xl border border-[#F2C6D8] bg-[#FDF0F5] px-3.5 py-2 text-sm font-medium text-[#351B38]"
+              className="inline-flex items-center gap-2 rounded-xl border border-[#E9D8D1] bg-[#F9F3EC] px-3.5 py-2 text-sm font-medium text-[#351B38]"
             >
               <span>{m.nameAr}</span>
               <button
                 type="button"
                 onClick={() => onToggleCompare(m.id)}
                 aria-label={`إزالة ${m.nameAr} من المقارنة`}
-                className="rounded-full p-0.5 text-[#5F4163] hover:bg-[#FADCE8] hover:text-[#351B38] cursor-pointer"
+                className="rounded-full p-0.5 text-[#5F4562] hover:bg-[#E9D8D1] hover:text-[#351B38] cursor-pointer"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -112,14 +107,14 @@ export function ComparePage({
               </label>
               <div className="relative flex items-center">
                 <Plus
-                  className="pointer-events-none absolute right-3 h-4 w-4 text-[#C04472]"
+                  className="pointer-events-none absolute right-3 h-4 w-4 text-[#762D50]"
                   aria-hidden="true"
                 />
                 <select
                   id="add-compare-select"
                   defaultValue=""
                   onChange={handleAddSelect}
-                  className="w-full min-h-[42px] rounded-2xl border border-[#EAD3E0] bg-[#FFF8F3] pr-9 pl-8 text-sm text-[#351B38] focus:border-[#C04472] focus:outline-none cursor-pointer"
+                  className="w-full min-h-[42px] rounded-xl border border-[#E9D8D1] bg-[#F9F3EC] pr-9 pl-8 text-sm text-[#351B38] focus:border-[#762D50] focus:outline-none cursor-pointer"
                 >
                   <option value="" disabled>
                     أضيفي تخصصاً للمقارنة...
@@ -137,24 +132,23 @@ export function ComparePage({
       </section>
 
       {selectedMajors.length < 2 ? (
-        <div className="rounded-3xl border border-[#EAD3E0] bg-[#FFFCFA] p-8 text-center space-y-4">
+        <div className="rounded-3xl border border-[#E9D8D1] bg-[#FFFDF9] p-8 text-center space-y-4">
           <p className="font-display text-lg font-bold text-[#351B38]">
             اختاري تخصصين على الأقل للبدء بالمقارنة
           </p>
-          <p className="text-sm text-[#5F4163]">
+          <p className="text-sm text-[#5F4562]">
             يمكنكِ إضافة تخصصات من القائمة أعلاه أو عبر دليل التخصصات.
           </p>
           <button
             type="button"
             onClick={() => onNavigate('/majors')}
-            className="rounded-full bg-gradient-to-l from-[#C04472] to-[#7651B8] px-6 py-2.5 text-sm font-medium text-white hover:opacity-95 cursor-pointer"
+            className="rounded-full bg-[#762D50] px-6 py-2.5 text-sm font-medium text-[#F9F3EC] hover:bg-[#5D223E] cursor-pointer"
           >
             استعراض التخصصات
           </button>
         </div>
       ) : (
         <>
-          {/* Responsive stacked cards (mobile) -> 2 or 3 equal columns (desktop) */}
           <div
             className={`grid gap-5 ${
               selectedMajors.length === 2 ? 'lg:grid-cols-2' : 'lg:grid-cols-3'
@@ -163,20 +157,18 @@ export function ComparePage({
             {selectedMajors.map((major) => (
               <article
                 key={major.id}
-                className="rounded-3xl border border-[#EAD3E0] bg-[#FFFCFA] p-6 flex flex-col justify-between gap-5"
+                className="rounded-2xl border border-[#E9D8D1] bg-[#FFFDF9] p-6 flex flex-col justify-between gap-5"
               >
                 <div className="space-y-5">
-                  <div className="flex items-start gap-3.5 pb-4 border-b border-[#F2E2EB]">
-                    <CharacterStage
-                      characterId={DOMAIN_CHARACTER_MAP[major.category]}
-                      variant="avatar"
-                      interactive={false}
-                      className="h-16 w-16 shrink-0"
+                  <div className="flex items-start gap-3.5 pb-4 border-b border-[#E9D8D1]">
+                    <CategoryIllustration
+                      category={major.category}
+                      className="h-12 w-12 shrink-0"
                     />
                     <div>
-                      <p className="text-xs text-[#6E5073]">
+                      <p className="text-xs text-[#6F5472]">
                         {major.categoryLabelAr} ·{' '}
-                        <span className="font-semibold text-[#7651B8]">
+                        <span className="font-semibold text-[#762D50]">
                           {major.credentialLabelAr}
                         </span>
                       </p>
@@ -186,10 +178,9 @@ export function ComparePage({
                     </div>
                   </div>
 
-                  {/* Interactive RIASEC Weight Visual Bars */}
-                  <div className="rounded-2xl border border-[#F2E2EB] bg-[#FFF8F3] p-3.5 space-y-2">
-                    <p className="font-display text-xs font-bold text-[#7651B8]">
-                      أبرز أبعاد الاهتمام في هذا التخصص
+                  <div className="rounded-xl border border-[#E9D8D1] bg-[#F9F3EC]/70 p-3.5 space-y-2">
+                    <p className="font-display text-xs font-bold text-[#351B38]">
+                      أبرز أبعاد الاهتمام
                     </p>
                     <div className="space-y-1.5">
                       {RIASEC_ORDER.map((code) => {
@@ -197,17 +188,14 @@ export function ComparePage({
                         if (w < 15) return null;
                         return (
                           <div key={code} className="space-y-0.5">
-                            <div className="flex justify-between text-[11px] text-[#5F4163]">
+                            <div className="flex justify-between text-[11px] text-[#5F4562]">
                               <span>{RIASEC_PROFILES[code].nameAr.replace('النمط ', '')}</span>
                               <span className="tabular-nums font-semibold">{w}%</span>
                             </div>
-                            <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#EFE5EE]">
+                            <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#E9D8D1]">
                               <div
-                                className="h-full rounded-full"
-                                style={{
-                                  width: `${w}%`,
-                                  backgroundColor: RIASEC_PROFILES[code].colorHex,
-                                }}
+                                className="h-full rounded-full bg-[#762D50]"
+                                style={{ width: `${w}%` }}
                               />
                             </div>
                           </div>
@@ -218,17 +206,17 @@ export function ComparePage({
 
                   <div className="space-y-4 text-sm">
                     <div>
-                      <h3 className="font-display text-xs font-bold text-[#C04472] mb-1">
+                      <h3 className="font-display text-xs font-bold text-[#762D50] mb-1">
                         طبيعة الدراسة
                       </h3>
-                      <p className="text-[#4F3553] leading-relaxed">{major.studyNatureAr}</p>
+                      <p className="text-[#5F4562] leading-relaxed">{major.studyNatureAr}</p>
                     </div>
 
                     <div>
-                      <h3 className="font-display text-xs font-bold text-[#C04472] mb-1">
+                      <h3 className="font-display text-xs font-bold text-[#762D50] mb-1">
                         أبرز المواد
                       </h3>
-                      <ul className="list-disc list-inside text-[#4F3553] space-y-0.5">
+                      <ul className="list-disc list-inside text-[#5F4562] space-y-0.5">
                         {major.sampleSubjectsAr.slice(0, 4).map((s) => (
                           <li key={s}>{s}</li>
                         ))}
@@ -236,10 +224,10 @@ export function ComparePage({
                     </div>
 
                     <div>
-                      <h3 className="font-display text-xs font-bold text-[#C04472] mb-1">
+                      <h3 className="font-display text-xs font-bold text-[#762D50] mb-1">
                         المهارات المطلوبة
                       </h3>
-                      <ul className="list-disc list-inside text-[#4F3553] space-y-0.5">
+                      <ul className="list-disc list-inside text-[#5F4562] space-y-0.5">
                         {major.usefulSkillsAr.slice(0, 3).map((sk) => (
                           <li key={sk}>{sk}</li>
                         ))}
@@ -247,10 +235,10 @@ export function ComparePage({
                     </div>
 
                     <div>
-                      <h3 className="font-display text-xs font-bold text-[#9F7C33] mb-1">
+                      <h3 className="font-display text-xs font-bold text-[#9F7E44] mb-1">
                         التحديات
                       </h3>
-                      <ul className="list-disc list-inside text-[#4F3553] space-y-0.5">
+                      <ul className="list-disc list-inside text-[#5F4562] space-y-0.5">
                         {major.challengesAr.map((ch) => (
                           <li key={ch}>{ch}</li>
                         ))}
@@ -258,10 +246,10 @@ export function ComparePage({
                     </div>
 
                     <div>
-                      <h3 className="font-display text-xs font-bold text-[#7651B8] mb-1">
+                      <h3 className="font-display text-xs font-bold text-[#351B38] mb-1">
                         مجالات العمل المحتملة
                       </h3>
-                      <ul className="list-disc list-inside text-[#4F3553] space-y-0.5">
+                      <ul className="list-disc list-inside text-[#5F4562] space-y-0.5">
                         {major.potentialCareersAr.map((job) => (
                           <li key={job}>{job}</li>
                         ))}
@@ -270,11 +258,11 @@ export function ComparePage({
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-[#F2E2EB]">
+                <div className="pt-3 border-t border-[#E9D8D1]">
                   <button
                     type="button"
                     onClick={() => onNavigate(`/majors/${major.id}`)}
-                    className="w-full inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-full border border-[#F2C6D8] bg-[#FDF0F5] px-4 py-2 text-xs font-medium text-[#351B38] hover:bg-[#FADCE8] cursor-pointer"
+                    className="w-full inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-full border border-[#E9D8D1] bg-[#F9F3EC] px-4 py-2 text-xs font-medium text-[#351B38] hover:border-[#762D50] cursor-pointer"
                   >
                     <span>عرض الصفحة الكاملة للتخصص</span>
                     <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
@@ -284,17 +272,16 @@ export function ComparePage({
             ))}
           </div>
 
-          {/* Dynamic similarities & differences summary */}
           {comparisonSummary && (
-            <section className="rounded-3xl border border-[#D8C9F2] bg-[#F4EFFB] p-6 space-y-4 text-sm text-[#4F3553]">
+            <section className="rounded-2xl border border-[#E9D8D1] bg-[#FFFDF9] p-6 space-y-4 text-sm text-[#5F4562]">
               <div className="flex items-center gap-2 font-display font-bold text-[#351B38]">
-                <Info className="h-4 w-4 text-[#7651B8]" aria-hidden="true" />
-                <span>نقاط التشابه والاختلاف بين التخصصات المختارة</span>
+                <Info className="h-4 w-4 text-[#762D50]" aria-hidden="true" />
+                <span>خلاصة أوجه التشابه والاختلاف</span>
               </div>
 
               <div className="grid gap-4 md:grid-cols-2">
-                <div className="rounded-2xl border border-[#E2D5F5] bg-[#FFFCFA] p-4 space-y-1.5">
-                  <h3 className="font-display text-xs font-bold text-[#7651B8]">
+                <div className="rounded-xl border border-[#E9D8D1] bg-[#F9F3EC] p-4 space-y-1.5">
+                  <h3 className="font-display text-xs font-bold text-[#762D50]">
                     أوجه التشابه المشتركة
                   </h3>
                   <p className="leading-relaxed">
@@ -303,13 +290,13 @@ export function ComparePage({
                         تشترك التخصصات المختارة في اعتمادها على{' '}
                         <strong>{comparisonSummary.sharedDimensions.join(' و')}</strong>
                         {comparisonSummary.sameCategory
-                          ? `، كما تنتمي جميعها إلى مجال ${selectedMajors[0].categoryLabelAr}.`
-                          : ' رغم اختلاف مجالاتها الأكاديمية.'}
+                          ? `، وتنتمي إلى مجال ${selectedMajors[0].categoryLabelAr}.`
+                          : ' رغم تنوع مجالاتها الأكاديمية.'}
                       </>
                     ) : (
                       <>
                         تتنوع هذه التخصصات في اهتماماتها الأساسية، وتجمعها الحاجة إلى الممارسة
-                        العملية وبناء المهارات بالتوازي مع الدراسة{' '}
+                        العملية{' '}
                         {comparisonSummary.sameCredential
                           ? `ضمن مسار ${selectedMajors[0].credentialLabelAr}.`
                           : '.'}
@@ -318,9 +305,9 @@ export function ComparePage({
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-[#E2D5F5] bg-[#FFFCFA] p-4 space-y-1.5">
-                  <h3 className="font-display text-xs font-bold text-[#C04472]">
-                    أبرز الفروق والتركيز لكل مسار
+                <div className="rounded-xl border border-[#E9D8D1] bg-[#F9F3EC] p-4 space-y-1.5">
+                  <h3 className="font-display text-xs font-bold text-[#351B38]">
+                    أبرز الفروق لكل مسار
                   </h3>
                   <ul className="space-y-1 text-xs sm:text-sm">
                     {comparisonSummary.distinctDimensions.map((item) => (

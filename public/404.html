@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ZAHRTI — إعادة التوجيه</title>
+    <script>
+      (function () {
+        var base = '/muza1p.github.io-zahrti/';
+        var pathname = window.location.pathname || '/';
+        var route = pathname;
+        if (pathname.indexOf(base) === 0) {
+          route = '/' + pathname.slice(base.length);
+        } else {
+          // Handle fork/custom repo subpaths dynamically: preserve first segment if hosted on *.github.io
+          var segments = pathname.split('/').filter(Boolean);
+          if (segments.length > 0 && window.location.hostname.endsWith('github.io')) {
+            base = '/' + segments[0] + '/';
+            route = '/' + segments.slice(1).join('/');
+          }
+        }
+        var search = window.location.search || '';
+        var cleanRoute = route === '/' ? '' : route.replace(/^\/+/, '');
+        window.location.replace(base + '#/' + cleanRoute + search);
+      })();
+    </script>
+  </head>
+  <body style="background:#F9F3EC;color:#351B38;font-family:system-ui,sans-serif;padding:2rem;text-align:center;">
+    <p>جاري تحويلكِ إلى زهرتي...</p>
+  </body>
+</html>

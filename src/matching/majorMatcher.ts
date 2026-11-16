@@ -9,14 +9,13 @@ import {
 /**
  * Computes multi-dimensional cosine-weighted affinity between a user's 6-dimension
  * RIASEC profile and each major's multi-interest weights.
- * This never reduces the student to a single interest type and never outputs
- * misleading acceptance or success percentages.
+ * `affinityPercentage` is strictly derived from cosine similarity (0..100) representing
+ * activity-interest overlap, never acceptance or career guarantee.
  */
 export function computeMajorAffinity(
   result: AssessmentResult,
   major: Major
-): { affinity: number; matchedInterests: RiasecCode[] } {
-  // Use normalized scores (0..1) plus small boost for top-ranked dimensions
+): { affinity: number; affinityPercentage: number; matchedInterests: RiasecCode[] } {
   const userVec = RIASEC_ORDER.map((code) => {
     const area = result.scores[code];
     const topBonus = result.topThreeCodes.includes(code) ? 0.15 : 0;
@@ -30,8 +29,8 @@ export function computeMajorAffinity(
   const magMajor = Math.sqrt(majorVec.reduce((sum, m) => sum + m * m, 0));
 
   const cosine = magUser > 0 && magMajor > 0 ? dot / (magUser * magMajor) : 0;
+  const clampedCosine = Math.max(0, Math.min(1, cosine));
 
-  // Identify up to 3 overlapping interests where both user and major show meaningful alignment
   const matchedInterests = RIASEC_ORDER.filter(
     (code) => major.riasecWeights[code] >= 0.45 && result.scores[code].score >= 8
   ).sort((a, b) => {
@@ -48,7 +47,8 @@ export function computeMajorAffinity(
           .slice(0, 2);
 
   return {
-    affinity: Number(cosine.toFixed(4)),
+    affinity: Number(clampedCosine.toFixed(4)),
+    affinityPercentage: Math.round(clampedCosine * 100),
     matchedInterests: fallbackMatched.slice(0, 3),
   };
 }
@@ -59,16 +59,16 @@ function buildExploratoryReason(
   flatProfile: boolean
 ): string {
   if (flatProfile) {
-    return `تظهر إجاباتج اهتمامات متقاربة عبر عدة مجالات؛ قد يستحق «${major.nameAr}» الاستكشاف للتعرف على طبيعة مواده وأنشطته اليومية.`;
+    return `تظهر إجاباتج اهتمامات متقاربة عبر عدة مجالات؛ يستحق تخصص «${major.nameAr}» الاستكشاف للتعرف على طبيعة مواده وأنشطته اليومية.`;
   }
   const names = matchedInterests.map((c) => RIASEC_PROFILES[c].nameAr.replace('النمط ', ''));
   if (names.length >= 2) {
-    return `قد يكون هذا التخصص خياراً يستحق الاستكشاف لأن أنشطته تتقاطع مع اهتماماتج في الجانب ${names[0]} و${names[1]}.`;
+    return `تتقاطع أنشطة هذا التخصص بوضوح مع اهتماماتج في الجانب ${names[0]} و${names[1]}.`;
   }
   if (names.length === 1) {
-    return `قد يكون هذا التخصص خياراً يستحق الاستكشاف لأن بعض أنشطته الدراسية تتقاطع مع ميولج في الجانب ${names[0]}.`;
+    return `تتقاطع بعض المواد والأنشطة العملية في هذا التخصص مع ميولج في الجانب ${names[0]}.`;
   }
-  return `يجمع هذا التخصص بين مهارات متعددة قد تمنحج زاوية واضحة عند مقارنته مع اهتماماتج.`;
+  return `يجمع هذا التخصص بين مهارات متنوعة تمنحج مساحة عملية لمقارنته مع أولوياتج.`;
 }
 
 export function recommendMajorsForResult(
@@ -82,6 +82,7 @@ export function recommendMajorsForResult(
 ): {
   primaryRecommendations: MajorRecommendation[];
   closeAlternatives: MajorRecommendation[];
+  allRanked: MajorRecommendation[];
 } {
   const primaryCount = options?.primaryCount ?? 5;
   const alternativesCount = options?.alternativesCount ?? 3;
@@ -92,23 +93,22 @@ export function recommendMajorsForResult(
     : majors.filter((m) => m.credentialType === 'bachelor');
 
   const scored: MajorRecommendation[] = pool.map((major) => {
-    const { affinity, matchedInterests } = computeMajorAffinity(result, major);
+    const { affinity, affinityPercentage, matchedInterests } = computeMajorAffinity(result, major);
     return {
       major,
       affinityScore: affinity,
+      affinityPercentage,
       matchedInterests,
       reasonAr: buildExploratoryReason(major, matchedInterests, result.flatProfile),
       isCloseAlternative: false,
     };
   });
 
-  // Sort by affinity, encouraging category diversity in the top 5 so the user doesn't see 5 clones
   scored.sort((a, b) => b.affinityScore - a.affinityScore);
 
   const primaryRecommendations: MajorRecommendation[] = [];
-  const usedCategories = new Set<string>();
 
-  // First pass: pick top scoring majors while preferring diverse categories (at most 2 per category in top 5)
+  // Pick ordered matches while keeping category diversity (max 2 per category in primary top list)
   for (const item of scored) {
     if (primaryRecommendations.length >= primaryCount) break;
     const catCount = primaryRecommendations.filter(
@@ -116,11 +116,9 @@ export function recommendMajorsForResult(
     ).length;
     if (catCount < 2) {
       primaryRecommendations.push(item);
-      usedCategories.add(item.major.category);
     }
   }
 
-  // Fill if still short
   for (const item of scored) {
     if (primaryRecommendations.length >= primaryCount) break;
     if (!primaryRecommendations.some((r) => r.major.id === item.major.id)) {
@@ -130,7 +128,6 @@ export function recommendMajorsForResult(
 
   const primaryIds = new Set(primaryRecommendations.map((r) => r.major.id));
 
-  // Close alternatives: prioritize majors listed in relatedMajorIds of primary picks or next highest affinity
   const relatedPoolIds = new Set<string>();
   for (const rec of primaryRecommendations) {
     for (const relId of rec.major.relatedMajorIds) {
@@ -154,5 +151,6 @@ export function recommendMajorsForResult(
   return {
     primaryRecommendations,
     closeAlternatives,
+    allRanked: scored,
   };
 }

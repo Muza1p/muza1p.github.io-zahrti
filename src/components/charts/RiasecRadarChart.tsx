@@ -46,12 +46,11 @@ export function RiasecRadarChart({ scores }: RiasecRadarChartProps) {
       >
         <defs>
           <linearGradient id="riasecRadarFill" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#C04472" stopOpacity="0.34" />
-            <stop offset="100%" stopColor="#7651B8" stopOpacity="0.30" />
+            <stop offset="0%" stopColor="#762D50" stopOpacity="0.28" />
+            <stop offset="100%" stopColor="#C47C91" stopOpacity="0.26" />
           </linearGradient>
         </defs>
 
-        {/* Concentric Hex Grid */}
         {levels.map((lvl) => {
           const ringPts = RIASEC_ORDER.map((_, idx) => {
             const p = getPoint(idx, lvl);
@@ -61,16 +60,15 @@ export function RiasecRadarChart({ scores }: RiasecRadarChartProps) {
             <polygon
               key={lvl}
               points={ringPts}
-              fill={lvl === 1 ? '#FFF8F3' : 'none'}
-              fillOpacity={lvl === 1 ? 0.6 : 0}
-              stroke="#EAD3E0"
+              fill={lvl === 1 ? '#FFFDF9' : 'none'}
+              fillOpacity={lvl === 1 ? 0.75 : 0}
+              stroke="#E9D8D1"
               strokeWidth={lvl === 1 ? 1.5 : 1}
               strokeDasharray={lvl < 1 ? '3 3' : undefined}
             />
           );
         })}
 
-        {/* Radial Spokes */}
         {RIASEC_ORDER.map((code, idx) => {
           const outer = getPoint(idx, 1);
           return (
@@ -80,22 +78,20 @@ export function RiasecRadarChart({ scores }: RiasecRadarChartProps) {
               y1={cy}
               x2={outer.x}
               y2={outer.y}
-              stroke="#EAD3E0"
+              stroke="#E9D8D1"
               strokeWidth="1"
             />
           );
         })}
 
-        {/* User Profile Polygon */}
         <polygon
           points={polygonPoints}
           fill="url(#riasecRadarFill)"
-          stroke="#C04472"
+          stroke="#762D50"
           strokeWidth="2.2"
           strokeLinejoin="round"
         />
 
-        {/* Vertices & Interactive Labels */}
         {dataPoints.map((d) => {
           const isActive = hoveredCode === d.code;
           return (
@@ -109,9 +105,9 @@ export function RiasecRadarChart({ scores }: RiasecRadarChartProps) {
               <circle
                 cx={d.pt.x}
                 cy={d.pt.y}
-                r={isActive ? 7.5 : 5.5}
-                fill={d.info.colorHex}
-                stroke="#FFF8F3"
+                r={isActive ? 7.5 : 5.2}
+                fill={isActive ? '#C6A56B' : '#762D50'}
+                stroke="#FFFDF9"
                 strokeWidth="2"
               />
               <text
@@ -119,7 +115,7 @@ export function RiasecRadarChart({ scores }: RiasecRadarChartProps) {
                 y={d.labelPt.y}
                 textAnchor="middle"
                 dominantBaseline="middle"
-                fill={isActive ? d.info.colorHex : '#351B38'}
+                fill={isActive ? '#762D50' : '#351B38'}
                 fontSize="11.5"
                 fontWeight="700"
               >
@@ -130,7 +126,7 @@ export function RiasecRadarChart({ scores }: RiasecRadarChartProps) {
                 y={d.labelPt.y + 13}
                 textAnchor="middle"
                 dominantBaseline="middle"
-                fill="#5F4163"
+                fill="#5F4562"
                 fontSize="9.5"
                 fontWeight="600"
               >
@@ -141,11 +137,10 @@ export function RiasecRadarChart({ scores }: RiasecRadarChartProps) {
         })}
       </svg>
 
-      {/* Active vertex tooltip */}
-      <div className="min-h-[28px] text-center text-xs text-[#5F4163]">
+      <div className="min-h-[28px] text-center text-xs text-[#5F4562]">
         {hoveredCode ? (
           <span>
-            <strong style={{ color: RIASEC_PROFILES[hoveredCode].colorHex }}>
+            <strong className="text-[#762D50]">
               {RIASEC_PROFILES[hoveredCode].nameAr}
             </strong>
             {' — '}
@@ -154,7 +149,7 @@ export function RiasecRadarChart({ scores }: RiasecRadarChartProps) {
             </span>
           </span>
         ) : (
-          <span>مرري أو اضغطي على أي نقطة لاستعراض درجة النمط</span>
+          <span>مرري أو اضغطي على أي محور لاستعراض درجة النمط</span>
         )}
       </div>
     </div>
